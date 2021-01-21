@@ -127,6 +127,33 @@
     </entry>
     
     
+    
+    <entry>
+      <title>基于微分和积分器件的微分方程的全光求解</title>
+      <link href="2021/01/01/%E5%9F%BA%E4%BA%8E%E5%BE%AE%E5%88%86%E5%92%8C%E7%A7%AF%E5%88%86%E5%99%A8%E4%BB%B6%E7%9A%84%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E5%85%A8%E5%85%89%E6%B1%82%E8%A7%A3/"/>
+      <url>2021/01/01/%E5%9F%BA%E4%BA%8E%E5%BE%AE%E5%88%86%E5%92%8C%E7%A7%AF%E5%88%86%E5%99%A8%E4%BB%B6%E7%9A%84%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E5%85%A8%E5%85%89%E6%B1%82%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<h4 id="基于微分和积分器件的微分方程的全光求解"><a href="#基于微分和积分器件的微分方程的全光求解" class="headerlink" title="基于微分和积分器件的微分方程的全光求解"></a>基于微分和积分器件的微分方程的全光求解</h4><h4 id="Investigation-on-All-Optically-Solving-Differential-Equations-Based-on-Differentiator-and-Integrator"><a href="#Investigation-on-All-Optically-Solving-Differential-Equations-Based-on-Differentiator-and-Integrator" class="headerlink" title="Investigation on All-Optically Solving Differential Equations Based on Differentiator and Integrator"></a>Investigation on All-Optically Solving Differential Equations Based on Differentiator and Integrator</h4><p>——华中科技大学 谭斯斯</p><blockquote><p>全光信号处理就是采用全光的方法对信号进行处理，对于光传送网自下而上的不同分层来说，也需要不同的全光信号处理技术：</p><ul><li>在光传输层中需要实现光信号的放大、色散管理；</li><li>在光复用层中需要进行光信号的复用与解复用、码型转换、时钟恢复等；</li><li>而光通道层则涉及光的波长转换、信号再生、光开关等功能；</li><li>我们主要研究的微分方程的全光求解则属于全光网络中最高层的 IP 层中的全光逻辑运算的范围。</li></ul><h5 id="全光数字信号的逻辑操作"><a href="#全光数字信号的逻辑操作" class="headerlink" title="全光数字信号的逻辑操作"></a>全光数字信号的逻辑操作</h5><p>全光数字信号的逻辑操作处理对象是全光数字信号，关注光载波上所携带的数字信息的变化，主要是指数字信号的布尔运算，包括单一信号的逻辑操作和多路信号的复合逻辑运算。通常在全光网络交换节点处，需要利用数字信号的逻辑运算对信息的帧头进行识别，再对信号进行处理，然后通过结合波长转换、光缓存等技术控制节点处的光开关单元，实现对信息的路由或交换。</p><p>全光数字信号的逻辑操作包括单一逻辑操作和复合逻辑运算，目前实现的方法主要是利用非线性器件中的各种非线性效应，通过控制输入器件中的信号光和控制光，使它们经过非线性介质时产生相互作用，根据控制方式的不同便可以得到不同的逻辑输出。</p><p>非线性器件：</p><ul><li>高非线性光纤（HNLF）</li><li>周期极化反转铌酸锂(PPLN)光波导</li><li>硅基波导</li><li>光子晶体光纤</li></ul><p>非线性效应：</p><ul><li>交叉增益调制（XGM）</li><li>交叉相位调制（XPM）</li><li>自相位调制（SPM）</li><li>瞬态交叉</li><li>相位调制（T-XPM）</li><li>交叉偏振调制（XPolM）</li><li>四波混频（FWM）</li><li>倍频（SHG）</li><li>和频（SFG）</li><li>差频（DFG）</li></ul><h5 id="全光模拟信号的运算操作"><a href="#全光模拟信号的运算操作" class="headerlink" title="全光模拟信号的运算操作"></a>全光模拟信号的运算操作</h5><p>全光模拟信号的运算操作应用范围从最简单的光的线性放大，光信号的微分与积分操作，到复杂的光信号的多种变换、微分方程的全光求解等。</p><ul><li>全光微分可以用来产生超宽带（UWB）信号，从而解决光纤到户（FTTH）“最后一公里”的问题；</li><li>全光积分操作则能够在光域中实现信号的缓存，从而有希望克服光信号存储的难题；</li><li>全光希尔伯特变换能够方便的实现信号的单边带调制，从而提高系统的频谱利用率；</li><li>全光傅里叶变换能够实现光信号的时频互换，从而将时域上较难处理的问题转换到频域利用滤波器原理方便的实现，如任意波形产生等问题。</li></ul><p>全光模拟信号的运算操作主要针对全光模拟信号的幅度和相位进行处理，许多模拟信号的运算功能都可以利用滤波器原理，通过设计器件的时域或频域响应函数来实现。</p><h5 id="微分方程的全光求解"><a href="#微分方程的全光求解" class="headerlink" title="微分方程的全光求解"></a>微分方程的全光求解</h5><ul><li>基于反馈环路的微分方程的全光求解方案</li><li>基于器件时域或频域响应函数设计的微分方程的全光求解方案 </li></ul><h5 id="全光微分器件"><a href="#全光微分器件" class="headerlink" title="全光微分器件"></a>全光微分器件</h5><ul><li>光强度微分器</li><li>光场微分器</li><li>应用：<ul><li>超宽带信号（UWB）产生 </li><li>光脉冲整形</li><li>暗孤子探测 </li><li>微分方程的全光求解 </li><li>超短脉冲的产生</li><li>基于全光微分器的光信号相位恢复</li></ul></li></ul><h5 id="全光积分器"><a href="#全光积分器" class="headerlink" title="全光积分器"></a>全光积分器</h5><ul><li>光强度积分器</li><li>光场积分器</li><li>应用：<ul><li>暗孤子产生</li><li>脉冲整形</li><li>光存储</li><li>微分方程的全光求解</li></ul></li></ul><h5 id="微环谐振器"><a href="#微环谐振器" class="headerlink" title="微环谐振器"></a>微环谐振器</h5><p>全通型微环</p><p>上下载型微环</p><p>基于积分原理的高阶微分方程的全光求解理论和实验研究</p><ul><li>利用高Q值微环谐振器实现的全光积分器</li></ul></blockquote><h5 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h5><p>[1]谭斯斯. 基于微分和积分器件的微分方程的全光求解[D].华中科技大学,2014.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 光计算 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 全光运算 </tag>
+            
+            <tag> 微分，积分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
   
   
 </search>
