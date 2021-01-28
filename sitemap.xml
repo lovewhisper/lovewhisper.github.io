@@ -256,6 +256,27 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/quantum-computer/</loc>
+    <lastmod>2021-01-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/quantum-supremacy/</loc>
+    <lastmod>2021-01-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Jiuzhang/</loc>
+    <lastmod>2021-01-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/AI/</loc>
     <lastmod>2021-01-28</lastmod>
     <changefreq>daily</changefreq>
@@ -292,27 +313,6 @@
   
   <url>
     <loc>http://example.com/tags/Musk/</loc>
-    <lastmod>2021-01-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/quantum-computer/</loc>
-    <lastmod>2021-01-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/quantum-supremacy/</loc>
-    <lastmod>2021-01-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Jiuzhang/</loc>
     <lastmod>2021-01-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
