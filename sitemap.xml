@@ -256,13 +256,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/Guo-Jingming/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/quantum-computer/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
@@ -312,7 +305,21 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/Guo-Jingming/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/Musk/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Trump/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -326,7 +333,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/Trump/</loc>
+    <loc>http://example.com/tags/Official-State-Car/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Bulletproof-Chevrolet-Suburban-SUV/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -348,6 +362,13 @@
   
   <url>
     <loc>http://example.com/tags/toddler/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Joe-Biden/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -396,6 +417,20 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/FDI/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Covid-19/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/Kobe/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
@@ -403,21 +438,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/Official-State-Car/</loc>
+    <loc>http://example.com/tags/Fort-Detrick/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/Bulletproof-Chevrolet-Suburban-SUV/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Joe-Biden/</loc>
+    <loc>http://example.com/tags/biological/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -439,34 +467,6 @@
   
   <url>
     <loc>http://example.com/tags/%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/FDI/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Covid-19/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Fort-Detrick/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/biological/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
