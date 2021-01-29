@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2021/01/29/Range20210129/</loc>
+    
+    <lastmod>2021-01-29</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://example.com/2021/01/08/Range20210108/</loc>
     
     <lastmod>2021-01-28</lastmod>
@@ -190,13 +197,6 @@
     
   </url>
   
-  <url>
-    <loc>http://example.com/schedule/index.html</loc>
-    
-    <lastmod>2021-01-21</lastmod>
-    
-  </url>
-  
 
   <url>
     <loc>http://example.com/</loc>
@@ -277,6 +277,20 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/Musk/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Trump/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/AI/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
@@ -306,27 +320,6 @@
   
   <url>
     <loc>http://example.com/tags/Guo-Jingming/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Musk/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Trump/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/sumo/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -396,6 +389,13 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/sumo/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/Amazon/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
@@ -411,20 +411,6 @@
   
   <url>
     <loc>http://example.com/tags/mail-in-voting/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/FDI/</loc>
-    <lastmod>2021-01-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Covid-19/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -452,6 +438,13 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/Tesla/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/%E5%BF%B5%E6%81%8B%E5%8F%B6%E8%AF%AD/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
@@ -460,6 +453,20 @@
   
   <url>
     <loc>http://example.com/tags/lovewhisper/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/FDI/</loc>
+    <lastmod>2021-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Covid-19/</loc>
     <lastmod>2021-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
