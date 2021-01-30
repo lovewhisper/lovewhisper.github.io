@@ -298,13 +298,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/Trump/</loc>
-    <lastmod>2021-01-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/PDD/</loc>
     <lastmod>2021-01-30</lastmod>
     <changefreq>daily</changefreq>
@@ -320,6 +313,20 @@
   
   <url>
     <loc>http://example.com/tags/Guo-Jingming/</loc>
+    <lastmod>2021-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Musk/</loc>
+    <lastmod>2021-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Trump/</loc>
     <lastmod>2021-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -417,7 +424,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/Musk/</loc>
+    <loc>http://example.com/tags/FDI/</loc>
+    <lastmod>2021-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/Covid-19/</loc>
     <lastmod>2021-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -460,20 +474,6 @@
   
   <url>
     <loc>http://example.com/tags/lovewhisper/</loc>
-    <lastmod>2021-01-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/FDI/</loc>
-    <lastmod>2021-01-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Covid-19/</loc>
     <lastmod>2021-01-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
