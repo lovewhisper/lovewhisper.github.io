@@ -619,6 +619,31 @@
     
     
     <entry>
+      <title>高斯磁场定律</title>
+      <link href="2020/10/02/20201002%E9%AB%98%E6%96%AF%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%BE%8B/"/>
+      <url>2020/10/02/20201002%E9%AB%98%E6%96%AF%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%BE%8B/</url>
+      
+        <content type="html"><![CDATA[<h4 id="积分形式">积分形式</h4><p><span class="math display">\[\oint_S \overrightarrow{B} \bullet \overrightarrow{n}da=0\]</span></p><ul><li>自然界没有单独的磁极（磁单级）</li></ul><a id="more"></a><h5 id="核心思想">核心思想</h5><ul><li>穿过任意闭合曲面的总磁通量为零。</li></ul><h5 id="符号解释">符号解释</h5><ul><li><p>磁场<span class="math inline">\(\overrightarrow{B}\)</span></p><ul><li><p>洛伦兹力方程：带电粒子只有在相对于磁场运动时才会受到磁力作用。</p><p><span class="math inline">\(\overrightarrow{F_B}=q\overrightarrow{v}\times\overrightarrow{B}\)</span></p><ul><li><span class="math inline">\(\overrightarrow{F_B}\)</span>磁力</li><li>q是粒子电荷量</li><li><span class="math inline">\(\overrightarrow{v}\)</span>是粒子速度（相对于B）</li><li><span class="math inline">\(\overrightarrow{B}\)</span>是磁场</li></ul></li><li><p><span class="math inline">\(|\overrightarrow{B}|=\frac{\overrightarrow{F_B}}{q \overrightarrow{v}sin\theta}\)</span></p></li><li><p>单位：特斯拉T</p></li><li><p>磁场正比于磁力，方向垂直于磁力。</p></li><li><p>磁力总是垂直于瞬时速度，磁力沿运动方向的分量总为0，因此磁场做的功总为0。</p></li><li><p>静电场由电荷产生，磁场由电流产生。</p></li></ul></li><li><p>通过闭合曲面的磁通量<span class="math inline">\(\oint_S \overrightarrow{B} \bullet \overrightarrow{n}da\)</span></p><ul><li>磁通量单位：韦伯Wb</li></ul></li></ul><h4 id="微分形式">微分形式</h4><p><span class="math display">\[\overrightarrow{\nabla} \bullet \overrightarrow{B}=0\]</span></p><h5 id="核心思想-1">核心思想</h5><ul><li>磁场的散度处处为零。</li></ul><h5 id="符号解释-1">符号解释</h5><ul><li>磁场的散度<span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{B}\)</span></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 麦克斯韦方程组 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> maxwell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>高斯电场定律</title>
       <link href="2020/10/01/20201001%E9%AB%98%E6%96%AF%E7%94%B5%E5%9C%BA%E5%AE%9A%E5%BE%8B/"/>
       <url>2020/10/01/20201001%E9%AB%98%E6%96%AF%E7%94%B5%E5%9C%BA%E5%AE%9A%E5%BE%8B/</url>
