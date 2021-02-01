@@ -23,21 +23,25 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.2.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="积分形式 \[ \oint_S \overrightarrow{E} \bullet \overrightarrow{n} da&#x3D; \frac{q_{enc}}{\varepsilon_0} \] 核心思想 电荷产生电场，场通过任意闭合曲面的通量正比于曲面所包围的电荷总量。">
+<meta name="description" content="1 高斯电场定律 1.1 积分形式 \[ \oint_S \overrightarrow{E} \bullet \overrightarrow{n} da&#x3D; \frac{q_{enc}}{\varepsilon_0} \] 1.1.1 核心思想  电荷产生电场，场通过任意闭合曲面的通量正比于曲面所包围的电荷总量  1.1.2 符号解释  电场\(\overrightarrow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高斯电场定律">
-<meta property="og:url" content="http://example.com/2020/10/01/20201001%E9%AB%98%E6%96%AF%E7%94%B5%E5%9C%BA%E5%AE%9A%E5%BE%8B/index.html">
+<meta property="og:title" content="麦克斯韦方程组">
+<meta property="og:url" content="http://example.com/2020/10/31/20201031%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84/index.html">
 <meta property="og:site_name" content="Love Whisper">
-<meta property="og:description" content="积分形式 \[ \oint_S \overrightarrow{E} \bullet \overrightarrow{n} da&#x3D; \frac{q_{enc}}{\varepsilon_0} \] 核心思想 电荷产生电场，场通过任意闭合曲面的通量正比于曲面所包围的电荷总量。">
+<meta property="og:description" content="1 高斯电场定律 1.1 积分形式 \[ \oint_S \overrightarrow{E} \bullet \overrightarrow{n} da&#x3D; \frac{q_{enc}}{\varepsilon_0} \] 1.1.1 核心思想  电荷产生电场，场通过任意闭合曲面的通量正比于曲面所包围的电荷总量  1.1.2 符号解释  电场\(\overrightarrow">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-30T16:12:00.000Z">
-<meta property="article:modified_time" content="2021-02-01T03:25:25.713Z">
+<meta property="article:published_time" content="2020-10-30T16:12:00.000Z">
+<meta property="article:modified_time" content="2021-02-01T08:39:51.363Z">
 <meta property="article:author" content="Carl Zhao">
 <meta property="article:tag" content="maxwell">
+<meta property="article:tag" content="高斯电场定律">
+<meta property="article:tag" content="高斯磁场定律">
+<meta property="article:tag" content="法拉第定律">
+<meta property="article:tag" content="安培-麦克斯韦定律">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2020/10/01/20201001%E9%AB%98%E6%96%AF%E7%94%B5%E5%9C%BA%E5%AE%9A%E5%BE%8B/">
+<link rel="canonical" href="http://example.com/2020/10/31/20201031%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84/">
 
 
 <script class="page-configurations">
@@ -49,7 +53,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>高斯电场定律 | Love Whisper</title>
+<title>麦克斯韦方程组 | Love Whisper</title>
   
 
 
@@ -192,7 +196,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%AF%E5%88%86%E5%BD%A2%E5%BC%8F"><span class="nav-text">积分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A"><span class="nav-text">符号解释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F"><span class="nav-text">微分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-1"><span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A-1"><span class="nav-text">符号解释</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E7%94%B5%E5%9C%BA%E5%AE%9A%E5%BE%8B"><span class="nav-text">1 高斯电场定律</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%AF%E5%88%86%E5%BD%A2%E5%BC%8F"><span class="nav-text">1.1 积分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="nav-text">1.1.1 核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A"><span class="nav-text">1.1.2 符号解释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F"><span class="nav-text">1.2 微分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-1"><span class="nav-text">1.2.1 核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A-1"><span class="nav-text">1.2.2 符号解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%BE%8B"><span class="nav-text">2 高斯磁场定律</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%AF%E5%88%86%E5%BD%A2%E5%BC%8F-1"><span class="nav-text">2.1 积分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-2"><span class="nav-text">2.1.1 核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A-2"><span class="nav-text">2.1.2 符号解释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F-1"><span class="nav-text">2.2 微分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-3"><span class="nav-text">2.2.1 核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A-3"><span class="nav-text">2.2.2 符号解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%95%E6%8B%89%E7%AC%AC%E5%AE%9A%E5%BE%8B"><span class="nav-text">3 法拉第定律</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%AF%E5%88%86%E5%BD%A2%E5%BC%8F-2"><span class="nav-text">3.1 积分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-4"><span class="nav-text">3.1.1 核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A-4"><span class="nav-text">3.1.2 符号解释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F-2"><span class="nav-text">3.2 微分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-5"><span class="nav-text">3.2.1 核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A-5"><span class="nav-text">3.2.2 符号解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%9F%B9-%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E5%AE%9A%E5%BE%8B"><span class="nav-text">4 安培-麦克斯韦定律</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%AF%E5%88%86%E5%BD%A2%E5%BC%8F-3"><span class="nav-text">4.1 积分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-6"><span class="nav-text">4.1.1 核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A-6"><span class="nav-text">4.1.2 符号解释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F-3"><span class="nav-text">4.2 微分形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3-7"><span class="nav-text">4.2.1 核心思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E9%87%8A-7"><span class="nav-text">4.2.2 符号解释</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,7 +212,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -221,7 +225,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -265,7 +269,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/01/20201001%E9%AB%98%E6%96%AF%E7%94%B5%E5%9C%BA%E5%AE%9A%E5%BE%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/31/20201031%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -278,7 +282,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          高斯电场定律
+          麦克斯韦方程组
         </h1>
 
         <div class="post-meta-container">
@@ -289,14 +293,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-10-01 00:12:00" itemprop="dateCreated datePublished" datetime="2020-10-01T00:12:00+08:00">2020-10-01</time>
+      <time title="创建时间：2020-10-31 00:12:00" itemprop="dateCreated datePublished" datetime="2020-10-31T00:12:00+08:00">2020-10-31</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-02-01 11:25:25" itemprop="dateModified" datetime="2021-02-01T11:25:25+08:00">2021-02-01</time>
+        <time title="修改时间：2021-02-01 16:39:51" itemprop="dateModified" datetime="2021-02-01T16:39:51+08:00">2021-02-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -304,7 +308,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">麦克斯韦方程组</span></a>
+          <a href="/categories/%E5%85%89%E6%B3%A2%E5%AF%BC%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">光波导理论基础</span></a>
         </span>
     </span>
 
@@ -316,14 +320,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
+      <span>4.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -334,14 +338,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h4 id="积分形式">积分形式</h4>
+        <h3 id="高斯电场定律">1 高斯电场定律</h3>
+<h4 id="积分形式">1.1 积分形式</h4>
 <p><span class="math display">\[
 \oint_S \overrightarrow{E} \bullet \overrightarrow{n} da= \frac{q_{enc}}{\varepsilon_0}
 \]</span></p>
-<h5 id="核心思想">核心思想</h5>
-<p>电荷产生电场，场通过任意闭合曲面的通量正比于曲面所包围的电荷总量。</p>
-<a id="more"></a>
-<h5 id="符号解释">符号解释</h5>
+<h5 id="核心思想">1.1.1 核心思想</h5>
+<ul>
+<li>电荷产生电场，场通过任意闭合曲面的通量正比于曲面所包围的电荷总量</li>
+</ul>
+<h5 id="符号解释">1.1.2 符号解释</h5>
 <ul>
 <li><p>电场<span class="math inline">\(\overrightarrow{E}\)</span></p>
 <ul>
@@ -378,21 +384,25 @@
 <li>电介质材料：增加电容量和最大化电容的工作电压</li>
 </ul></li>
 </ul>
-<h4 id="微分形式">微分形式</h4>
+<h4 id="微分形式">1.2 微分形式</h4>
 <p><span class="math display">\[
 \overrightarrow{\nabla} \bullet \overrightarrow{E} = \frac{\rho}{\varepsilon_0}
 \]</span></p>
-<p>方程左边为电场散度的数学表示（场的散度是场从特定区域往外“流”的趋势）。</p>
-<p>方程右边为电荷密度除以真空电容率。</p>
-<h5 id="核心思想-1">核心思想</h5>
-<p>电荷产生的电场从正电荷散开，汇聚到负电荷。</p>
-<h5 id="符号解释-1">符号解释</h5>
+<ul>
+<li><p>方程左边为电场散度的数学表示（场的散度是场从特定区域往外“流”的趋势）。</p></li>
+<li><p>方程右边为电荷密度除以真空电容率。</p></li>
+</ul>
+<h5 id="核心思想-1">1.2.1 核心思想</h5>
+<ul>
+<li>电荷产生的电场从正电荷散开，汇聚到负电荷。</li>
+</ul>
+<h5 id="符号解释-1">1.2.2 符号解释</h5>
 <ul>
 <li><p>Nabla-del算子$ $</p>
 <ul>
 <li><span class="math inline">\(\overrightarrow{\nabla} \bullet\)</span>表示散度</li>
 <li><span class="math inline">\(\overrightarrow{\nabla} \times\)</span>表示旋度</li>
-<li><span class="math inline">\(\overrightarrow{\nabla}\)</span>表示梯度</li>
+<li>$ $表示梯度</li>
 <li><span class="math inline">\(\overrightarrow{\nabla} \equiv \overrightarrow{i}\frac{\partial}{\partial x}+\overrightarrow{j}\frac{\partial}{\partial y}+\overrightarrow{k}\frac{\partial}{\partial z}\)</span></li>
 </ul></li>
 <li><p>散度<span class="math inline">\(\overrightarrow{\nabla} \bullet\)</span></p>
@@ -405,6 +415,145 @@
 </ul></li>
 <li><p>电场的散度<span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{E}\)</span></p></li>
 </ul>
+<hr>
+<h3 id="高斯磁场定律">2 高斯磁场定律</h3>
+<h4 id="积分形式-1">2.1 积分形式</h4>
+<p><span class="math display">\[
+\oint_S \overrightarrow{B} \bullet \overrightarrow{n}da=0
+\]</span></p>
+<ul>
+<li>自然界没有单独的磁极（磁单级）</li>
+</ul>
+<h5 id="核心思想-2">2.1.1 核心思想</h5>
+<ul>
+<li>穿过任意闭合曲面的总磁通量为零。</li>
+</ul>
+<h5 id="符号解释-2">2.1.2 符号解释</h5>
+<ul>
+<li><p>磁场<span class="math inline">\(\overrightarrow{B}\)</span></p>
+<ul>
+<li><p>洛伦兹力方程：带电粒子只有在相对于磁场运动时才会受到磁力作用。</p>
+<p><span class="math inline">\(\overrightarrow{F_B}=q\overrightarrow{v}\times\overrightarrow{B}\)</span></p>
+<ul>
+<li><span class="math inline">\(\overrightarrow{F_B}\)</span>磁力</li>
+<li>q是粒子电荷量</li>
+<li><span class="math inline">\(\overrightarrow{v}\)</span>是粒子速度（相对于B）</li>
+<li><span class="math inline">\(\overrightarrow{B}\)</span>是磁场</li>
+</ul></li>
+<li><p><span class="math inline">\(|\overrightarrow{B}|=\frac{\overrightarrow{F_B}}{q \overrightarrow{v}sin\theta}\)</span></p></li>
+<li><p>单位：特斯拉T</p></li>
+<li><p>磁场正比于磁力，方向垂直于磁力。</p></li>
+<li><p>磁力总是垂直于瞬时速度，磁力沿运动方向的分量总为0，因此磁场做的功总为0。</p></li>
+<li><p>静电场由电荷产生，磁场由电流产生。</p></li>
+</ul></li>
+<li><p>通过闭合曲面的磁通量<span class="math inline">\(\oint_S \overrightarrow{B} \bullet \overrightarrow{n}da\)</span></p>
+<ul>
+<li>磁通量单位：韦伯Wb</li>
+</ul></li>
+</ul>
+<h4 id="微分形式-1">2.2 微分形式</h4>
+<p><span class="math display">\[
+\overrightarrow{\nabla} \bullet \overrightarrow{B}=0
+\]</span></p>
+<h5 id="核心思想-3">2.2.1 核心思想</h5>
+<ul>
+<li>磁场的散度处处为零。</li>
+</ul>
+<h5 id="符号解释-3">2.2.2 符号解释</h5>
+<ul>
+<li>磁场的散度<span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{B}\)</span></li>
+</ul>
+<hr>
+<h3 id="法拉第定律">3 法拉第定律</h3>
+<h4 id="积分形式-2">3.1 积分形式</h4>
+<p><span class="math display">\[
+\oint_C\overrightarrow{E}\bullet d\overrightarrow{l}=-\frac{d}{dt}\int_S{\overrightarrow{B} \bullet \overrightarrow{n}da}
+\]</span></p>
+<h5 id="核心思想-4">3.1.1 核心思想</h5>
+<ul>
+<li>穿过一个曲面的磁通量的变化会在该曲面的任意边界路径上感生出电动势，并且变化的磁场会感生出环绕的电场。</li>
+</ul>
+<h5 id="符号解释-4">3.1.2 符号解释</h5>
+<ul>
+<li>感生电场<span class="math inline">\(\overrightarrow{E}\)</span>
+<ul>
+<li>感生电场驱动的电流产生的磁通量与磁场变化导致的磁通量变化相反。</li>
+</ul></li>
+<li>线积分<span class="math inline">\(\oint_C() d\overrightarrow{l}\)</span></li>
+<li>矢量场的环流<span class="math inline">\(\oint_C\overrightarrow{A}\bullet d\overrightarrow{l}\)</span>
+<ul>
+<li>矢量场沿闭合路径的线积分称为场的环流。</li>
+</ul></li>
+<li>电场环流<span class="math inline">\(\oint_C\overrightarrow{E}\bullet d\overrightarrow{l}\)</span>
+<ul>
+<li>感生电场的场线形成闭合的环，因此这种电场可以沿回路驱动带电粒子。</li>
+<li>电场沿回路的环流称为电动势（emf）：电动势（emf）=<span class="math inline">\(\oint_C\overrightarrow{E}\bullet d\overrightarrow{l}\)</span></li>
+<li>感生电场沿路径的环流是电场对沿这条路径移动的单位电荷所做的功：
+<ul>
+<li><span class="math inline">\(\oint_C\overrightarrow{E}\bullet d\overrightarrow{l}=\oint_C\frac{\overrightarrow{F}}{q}\bullet d\overrightarrow{l}=\frac{\oint_C\overrightarrow{F}\bullet d\overrightarrow{l}}{q}=\frac{W}{q}\)</span></li>
+</ul></li>
+</ul></li>
+<li>磁通量的变化率<span class="math inline">\(\frac{d}{dt}\int_S{\overrightarrow{B} \bullet \overrightarrow{n}da}\)</span>
+<ul>
+<li><span class="math inline">\(\int_S{\overrightarrow{B} \bullet \overrightarrow{n}da}\)</span>磁通量</li>
+</ul></li>
+</ul>
+<h4 id="微分形式-2">3.2 微分形式</h4>
+<p><span class="math display">\[
+\overrightarrow{\nabla} \times \overrightarrow{E}=-\frac{\partial\overrightarrow{B}}{\partial t}
+\]</span></p>
+<ul>
+<li>方程的左边是电场旋度的数学描述——场线围绕一点旋转的趋势。</li>
+<li>方程的右边是磁场随时间的变化率。</li>
+</ul>
+<h5 id="核心思想-5">3.2.1 核心思想</h5>
+<ul>
+<li>随时间变化的磁场会产生环绕的电场。</li>
+</ul>
+<h5 id="符号解释-5">3.2.2 符号解释</h5>
+<ul>
+<li>旋度<span class="math inline">\(\overrightarrow{\nabla}\times\)</span></li>
+<li>电场的旋度<span class="math inline">\(\overrightarrow{\nabla} \times \overrightarrow{E}\)</span></li>
+</ul>
+<hr>
+<h3 id="安培-麦克斯韦定律">4 安培-麦克斯韦定律</h3>
+<h4 id="积分形式-3">4.1 积分形式</h4>
+<p><span class="math display">\[
+\oint_C\overrightarrow{B}\bullet d\overrightarrow{l}=\mu_0(I_{enc}+\varepsilon_0\frac{d}{dt}\int_S\overrightarrow{E}\bullet\overrightarrow{n}da)
+\]</span></p>
+<ul>
+<li>方程左边是沿着闭合路径C的环绕磁场的数学描述。</li>
+<li>方程右边是磁场的两个来源：静态导体电流和穿过C围绕的任意曲面S的变化电通量。</li>
+</ul>
+<h5 id="核心思想-6">4.1.1 核心思想</h5>
+<ul>
+<li>穿过曲面的电流或变化的电通量会产生沿曲面边界的环绕磁场。</li>
+</ul>
+<h5 id="符号解释-6">4.1.2 符号解释</h5>
+<ul>
+<li>磁场环流<span class="math inline">\(\oint_C\overrightarrow{B}\bullet d\overrightarrow{l}\)</span></li>
+<li>真空磁导率<span class="math inline">\(\mu_0\)</span>
+<ul>
+<li><span class="math inline">\(\mu_0=4\pi \times10^{-7}V\bullet s/(A\bullet m)\)</span></li>
+<li><span class="math inline">\(N/A^2 = m\bullet kg/C^2\)</span></li>
+</ul></li>
+<li>包围的电流<span class="math inline">\(I_{nec}\)</span></li>
+<li>电通量的变化率<span class="math inline">\(\frac{d}{dt}\int_S\overrightarrow{E}\bullet\overrightarrow{n}da\)</span></li>
+</ul>
+<h4 id="微分形式-3">4.2 微分形式</h4>
+<p><span class="math display">\[
+\overrightarrow{\nabla}\times\overrightarrow{B}=\mu_0(J+\varepsilon_0\frac{\partial \overrightarrow{E}}{\partial t})
+\]</span></p>
+<h5 id="核心思想-7">4.2.1 核心思想</h5>
+<ul>
+<li>电流和随时间变化的电场会产生环绕的磁场。</li>
+</ul>
+<h5 id="符号解释-7">4.2.2 符号解释</h5>
+<ul>
+<li>磁场的旋度<span class="math inline">\(\overrightarrow{\nabla}\times\overrightarrow{B}\)</span></li>
+<li>电流密度J</li>
+<li>位移电流密度 <span class="math inline">\(\varepsilon_0\frac{\partial \overrightarrow{E}}{dt}\)</span></li>
+</ul>
 
     </div>
 
@@ -415,6 +564,10 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/maxwell/" rel="tag"># maxwell</a>
+              <a href="/tags/%E9%AB%98%E6%96%AF%E7%94%B5%E5%9C%BA%E5%AE%9A%E5%BE%8B/" rel="tag"># 高斯电场定律</a>
+              <a href="/tags/%E9%AB%98%E6%96%AF%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%BE%8B/" rel="tag"># 高斯磁场定律</a>
+              <a href="/tags/%E6%B3%95%E6%8B%89%E7%AC%AC%E5%AE%9A%E5%BE%8B/" rel="tag"># 法拉第定律</a>
+              <a href="/tags/%E5%AE%89%E5%9F%B9-%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E5%AE%9A%E5%BE%8B/" rel="tag"># 安培-麦克斯韦定律</a>
           </div>
 
         
@@ -426,8 +579,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/10/02/20201002%E9%AB%98%E6%96%AF%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%BE%8B/" rel="next" title="高斯磁场定律">
-                  高斯磁场定律 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/01/01/Range20210101/" rel="next" title="看世界20210101">
+                  看世界20210101 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -482,13 +635,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">31k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">26 分钟</span>
+    <span title="站点阅读时长">28 分钟</span>
   </span>
 </div>
 <!--
