@@ -1669,7 +1669,7 @@ pre code {
   white-space: nowrap;
 }
 .post-toc .nav .nav-child {
-  display: none;
+  display: block;
 }
 .post-toc .nav .active > .nav-child {
   display: block;
@@ -2917,7 +2917,7 @@ mjx-container[display="true"] + br {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #d5dfff;
+  background: #177eff;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
