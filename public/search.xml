@@ -673,6 +673,33 @@
     
     
     <entry>
+      <title>电磁波在自由空间中的传播</title>
+      <link href="2020/11/01/20201101%E7%94%B5%E7%A3%81%E6%B3%A2%E5%9C%A8%E8%87%AA%E7%94%B1%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BC%A0%E6%92%AD/"/>
+      <url>2020/11/01/20201101%E7%94%B5%E7%A3%81%E6%B3%A2%E5%9C%A8%E8%87%AA%E7%94%B1%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BC%A0%E6%92%AD/</url>
+      
+        <content type="html"><![CDATA[<h3 id="预备知识">1 预备知识</h3><h4 id="叉乘的叉乘">1.1 叉乘的叉乘</h4><ul><li><span class="math inline">\(A\times (B\times C)=B(A\bullet C)-C(A\bullet B)\)</span></li></ul><h4 id="旋度的旋度">1.2 旋度的旋度</h4><ul><li><span class="math inline">\(\overrightarrow{\nabla} \times (\overrightarrow{\nabla}\times \overrightarrow{E})=\overrightarrow{\nabla}(\overrightarrow{\nabla} \bullet \overrightarrow{E})-\overrightarrow{E}(\overrightarrow{\nabla} \bullet \overrightarrow{\nabla})=\overrightarrow{\nabla}(\overrightarrow{\nabla} \bullet \overrightarrow{E})-\overrightarrow{\nabla}^2 \overrightarrow{E}\)</span></li></ul><a id="more"></a><h4 id="拉普拉斯算子">1.3 拉普拉斯算子</h4><ul><li><span class="math inline">\(\overrightarrow{\nabla}^2=\frac {\partial^2}{\partial x^2}+\frac {\partial^2}{\partial y^2}+\frac {\partial^2}{\partial z^2}\)</span></li></ul><h4 id="波动方程">1.4 波动方程</h4><ul><li><p>经典波动方程：<span class="math inline">\(\frac{\partial^2 f}{\partial x^2}=\frac{1}{\nu^2}\frac{\partial^2 f}{\partial t^2}\)</span></p></li><li><p>拉普拉斯算子表示：<span class="math inline">\({\nabla}^2 f=\frac{1}{\nu^2}\frac{\partial^2 f}{\partial t^2}\)</span></p></li></ul><hr><h3 id="电磁波在自由空间中的传播">2 电磁波在自由空间中的传播</h3><h4 id="自由空间中电磁波的特性">2.1 自由空间中电磁波的特性</h4><p>麦克斯韦方程组的基本形式为，</p><ul><li><span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{E} = \frac{\rho}{\varepsilon_0}\)</span></li><li><span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{B}=0\)</span></li><li><span class="math inline">\(\overrightarrow{\nabla} \times \overrightarrow{E}=-\frac{\partial\overrightarrow{B}}{\partial t}\)</span></li><li><span class="math inline">\(\overrightarrow{\nabla}\times\overrightarrow{B}=\mu_0(\overrightarrow{J}+\varepsilon_0\frac{\partial \overrightarrow{E}}{\partial t})\)</span></li></ul><p>当考虑在自由空间中的电磁波时，在媒介质内是无源的，即<span class="math inline">\(\rho=\overrightarrow{J}=0\)</span>。从而，</p><ul><li><span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{E} = 0\)</span></li><li><span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{B}=0\)</span></li><li><span class="math inline">\(\overrightarrow{\nabla} \times \overrightarrow{E}=-\frac{\partial\overrightarrow{B}}{\partial t}\)</span></li><li><span class="math inline">\(\overrightarrow{\nabla}\times\overrightarrow{B}=\mu_0 \varepsilon_0\frac{\partial \overrightarrow{E}}{\partial t}\)</span></li></ul><p>在自由空间中，电场的散度为零，磁场的散度为0；电场的旋度与磁场的变化率相关，磁场的旋度与电场的变化率相关。</p><h4 id="推导过程">2.2 推导过程</h4><ul><li><span class="math inline">\(\overrightarrow{\nabla} \times \overrightarrow{E}=-\frac{\partial\overrightarrow{B}}{\partial t}\)</span></li></ul><p>方程两边取旋度，得</p><ul><li><p><span class="math inline">\(\overrightarrow{\nabla} \times (\overrightarrow{\nabla}\times \overrightarrow{E})=-\frac{\partial}{\partial t}(\overrightarrow{\nabla} \times \overrightarrow{B})\)</span></p></li><li><p><span class="math inline">\(\overrightarrow{\nabla}(\overrightarrow{\nabla} \bullet \overrightarrow{E})-\overrightarrow{\nabla}^2 \overrightarrow{E}=-\frac{\partial}{\partial t}(\overrightarrow{\nabla} \times \overrightarrow{B})\)</span></p></li><li><p><span class="math inline">\(-\overrightarrow{\nabla}^2 \overrightarrow{E}=-\frac{\partial}{\partial t}(\mu_0 \varepsilon_0\frac{\partial \overrightarrow{E}}{\partial t})\)</span></p></li><li><p><span class="math inline">\(\overrightarrow{\nabla}^2 \overrightarrow{E}=\mu_0 \varepsilon_0\frac{\partial^2 \overrightarrow{E}}{\partial t^2}\)</span></p></li></ul><p>从而电场<span class="math inline">\(\overrightarrow{E}\)</span>是一个波。</p><p>同理，得</p><ul><li><span class="math inline">\(\overrightarrow{\nabla}^2 \overrightarrow{B}=\mu_0 \varepsilon_0\frac{\partial^2 \overrightarrow{B}}{\partial t^2}\)</span></li></ul><p>磁场<span class="math inline">\(\overrightarrow{B}\)</span>是一个波。</p><p>即电场<span class="math inline">\(\overrightarrow{E}\)</span>和磁场<span class="math inline">\(\overrightarrow{B}\)</span>都满足波动方程，电场和磁场以波动的方式在空间中传播。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 光波导理论基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 电磁波 </tag>
+            
+            <tag> 自由空间 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>麦克斯韦方程组</title>
       <link href="2020/10/31/20201031%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84/"/>
       <url>2020/10/31/20201031%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84/</url>

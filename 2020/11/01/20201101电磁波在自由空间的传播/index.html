@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/NL.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/NL.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/NL.png">
+  <link rel="mask-icon" href="/images/NL.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.2.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="1 预备知识 1.1 叉乘的叉乘  \(A\times (B\times C)&#x3D;B(A\bullet C)-C(A\bullet B)\)  1.2 旋度的旋度  \(\overrightarrow{\nabla} \times (\overrightarrow{\nabla}\times \overrightarrow{E})&#x3D;\overrightarrow{\nabla}(\ov">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电磁波在自由空间中的传播">
+<meta property="og:url" content="http://example.com/2020/11/01/20201101%E7%94%B5%E7%A3%81%E6%B3%A2%E5%9C%A8%E8%87%AA%E7%94%B1%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BC%A0%E6%92%AD/index.html">
+<meta property="og:site_name" content="Love Whisper">
+<meta property="og:description" content="1 预备知识 1.1 叉乘的叉乘  \(A\times (B\times C)&#x3D;B(A\bullet C)-C(A\bullet B)\)  1.2 旋度的旋度  \(\overrightarrow{\nabla} \times (\overrightarrow{\nabla}\times \overrightarrow{E})&#x3D;\overrightarrow{\nabla}(\ov">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-31T16:12:00.000Z">
+<meta property="article:modified_time" content="2021-02-02T08:15:17.320Z">
+<meta property="article:author" content="Carl Zhao">
+<meta property="article:tag" content="电磁波">
+<meta property="article:tag" content="自由空间">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2020/11/01/20201101%E7%94%B5%E7%A3%81%E6%B3%A2%E5%9C%A8%E8%87%AA%E7%94%B1%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BC%A0%E6%92%AD/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>电磁波在自由空间中的传播 | Love Whisper</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Love Whisper</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">念 | 恋 | 叶 | 语</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-text">1 预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%89%E4%B9%98%E7%9A%84%E5%8F%89%E4%B9%98"><span class="nav-text">1.1 叉乘的叉乘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%8B%E5%BA%A6%E7%9A%84%E6%97%8B%E5%BA%A6"><span class="nav-text">1.2 旋度的旋度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90"><span class="nav-text">1.3 拉普拉斯算子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A2%E5%8A%A8%E6%96%B9%E7%A8%8B"><span class="nav-text">1.4 波动方程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E7%A3%81%E6%B3%A2%E5%9C%A8%E8%87%AA%E7%94%B1%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E4%BC%A0%E6%92%AD"><span class="nav-text">2 电磁波在自由空间中的传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E7%94%B1%E7%A9%BA%E9%97%B4%E4%B8%AD%E7%94%B5%E7%A3%81%E6%B3%A2%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-text">2.1 自由空间中电磁波的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B"><span class="nav-text">2.2 推导过程</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Carl Zhao"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Carl Zhao</p>
+  <div class="site-description" itemprop="description">一约既定，万山无阻！</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lovewhisper" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lovewhisper" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/01/20201101%E7%94%B5%E7%A3%81%E6%B3%A2%E5%9C%A8%E8%87%AA%E7%94%B1%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BC%A0%E6%92%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Carl Zhao">
+      <meta itemprop="description" content="一约既定，万山无阻！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Love Whisper">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          电磁波在自由空间中的传播
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-01 00:12:00" itemprop="dateCreated datePublished" datetime="2020-11-01T00:12:00+08:00">2020-11-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-02 16:15:17" itemprop="dateModified" datetime="2021-02-02T16:15:17+08:00">2021-02-02</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%85%89%E6%B3%A2%E5%AF%BC%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">光波导理论基础</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="预备知识">1 预备知识</h3>
+<h4 id="叉乘的叉乘">1.1 叉乘的叉乘</h4>
+<ul>
+<li><span class="math inline">\(A\times (B\times C)=B(A\bullet C)-C(A\bullet B)\)</span></li>
+</ul>
+<h4 id="旋度的旋度">1.2 旋度的旋度</h4>
+<ul>
+<li><span class="math inline">\(\overrightarrow{\nabla} \times (\overrightarrow{\nabla}\times \overrightarrow{E})=\overrightarrow{\nabla}(\overrightarrow{\nabla} \bullet \overrightarrow{E})-\overrightarrow{E}(\overrightarrow{\nabla} \bullet \overrightarrow{\nabla})=\overrightarrow{\nabla}(\overrightarrow{\nabla} \bullet \overrightarrow{E})-\overrightarrow{\nabla}^2 \overrightarrow{E}\)</span></li>
+</ul>
+<a id="more"></a>
+<h4 id="拉普拉斯算子">1.3 拉普拉斯算子</h4>
+<ul>
+<li><span class="math inline">\(\overrightarrow{\nabla}^2=\frac {\partial^2}{\partial x^2}+\frac {\partial^2}{\partial y^2}+\frac {\partial^2}{\partial z^2}\)</span></li>
+</ul>
+<h4 id="波动方程">1.4 波动方程</h4>
+<ul>
+<li><p>经典波动方程：<span class="math inline">\(\frac{\partial^2 f}{\partial x^2}=\frac{1}{\nu^2}\frac{\partial^2 f}{\partial t^2}\)</span></p></li>
+<li><p>拉普拉斯算子表示：<span class="math inline">\({\nabla}^2 f=\frac{1}{\nu^2}\frac{\partial^2 f}{\partial t^2}\)</span></p></li>
+</ul>
+<hr>
+<h3 id="电磁波在自由空间中的传播">2 电磁波在自由空间中的传播</h3>
+<h4 id="自由空间中电磁波的特性">2.1 自由空间中电磁波的特性</h4>
+<p>麦克斯韦方程组的基本形式为，</p>
+<ul>
+<li><span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{E} = \frac{\rho}{\varepsilon_0}\)</span></li>
+<li><span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{B}=0\)</span></li>
+<li><span class="math inline">\(\overrightarrow{\nabla} \times \overrightarrow{E}=-\frac{\partial\overrightarrow{B}}{\partial t}\)</span></li>
+<li><span class="math inline">\(\overrightarrow{\nabla}\times\overrightarrow{B}=\mu_0(\overrightarrow{J}+\varepsilon_0\frac{\partial \overrightarrow{E}}{\partial t})\)</span></li>
+</ul>
+<p>当考虑在自由空间中的电磁波时，在媒介质内是无源的，即<span class="math inline">\(\rho=\overrightarrow{J}=0\)</span>。从而，</p>
+<ul>
+<li><span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{E} = 0\)</span></li>
+<li><span class="math inline">\(\overrightarrow{\nabla} \bullet \overrightarrow{B}=0\)</span></li>
+<li><span class="math inline">\(\overrightarrow{\nabla} \times \overrightarrow{E}=-\frac{\partial\overrightarrow{B}}{\partial t}\)</span></li>
+<li><span class="math inline">\(\overrightarrow{\nabla}\times\overrightarrow{B}=\mu_0 \varepsilon_0\frac{\partial \overrightarrow{E}}{\partial t}\)</span></li>
+</ul>
+<p>在自由空间中，电场的散度为零，磁场的散度为0；电场的旋度与磁场的变化率相关，磁场的旋度与电场的变化率相关。</p>
+<h4 id="推导过程">2.2 推导过程</h4>
+<ul>
+<li><span class="math inline">\(\overrightarrow{\nabla} \times \overrightarrow{E}=-\frac{\partial\overrightarrow{B}}{\partial t}\)</span></li>
+</ul>
+<p>方程两边取旋度，得</p>
+<ul>
+<li><p><span class="math inline">\(\overrightarrow{\nabla} \times (\overrightarrow{\nabla}\times \overrightarrow{E})=-\frac{\partial}{\partial t}(\overrightarrow{\nabla} \times \overrightarrow{B})\)</span></p></li>
+<li><p><span class="math inline">\(\overrightarrow{\nabla}(\overrightarrow{\nabla} \bullet \overrightarrow{E})-\overrightarrow{\nabla}^2 \overrightarrow{E}=-\frac{\partial}{\partial t}(\overrightarrow{\nabla} \times \overrightarrow{B})\)</span></p></li>
+<li><p><span class="math inline">\(-\overrightarrow{\nabla}^2 \overrightarrow{E}=-\frac{\partial}{\partial t}(\mu_0 \varepsilon_0\frac{\partial \overrightarrow{E}}{\partial t})\)</span></p></li>
+<li><p><span class="math inline">\(\overrightarrow{\nabla}^2 \overrightarrow{E}=\mu_0 \varepsilon_0\frac{\partial^2 \overrightarrow{E}}{\partial t^2}\)</span></p></li>
+</ul>
+<p>从而电场<span class="math inline">\(\overrightarrow{E}\)</span>是一个波。</p>
+<p>同理，得</p>
+<ul>
+<li><span class="math inline">\(\overrightarrow{\nabla}^2 \overrightarrow{B}=\mu_0 \varepsilon_0\frac{\partial^2 \overrightarrow{B}}{\partial t^2}\)</span></li>
+</ul>
+<p>磁场<span class="math inline">\(\overrightarrow{B}\)</span>是一个波。</p>
+<p>即电场<span class="math inline">\(\overrightarrow{E}\)</span>和磁场<span class="math inline">\(\overrightarrow{B}\)</span>都满足波动方程，电场和磁场以波动的方式在空间中传播。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%B5%E7%A3%81%E6%B3%A2/" rel="tag"># 电磁波</a>
+              <a href="/tags/%E8%87%AA%E7%94%B1%E7%A9%BA%E9%97%B4/" rel="tag"># 自由空间</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/31/20201031%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84/" rel="prev" title="麦克斯韦方程组">
+                  <i class="fa fa-chevron-left"></i> 麦克斯韦方程组
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/01/Range20210101/" rel="next" title="看世界20210101">
+                  看世界20210101 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Carl Zhao</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">35k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">32 分钟</span>
+  </span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+--><script color="0,0,255" opacity="0.5" zIndex="-1" count="50" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+
+
+</body>
+</html>
