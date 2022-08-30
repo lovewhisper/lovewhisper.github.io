@@ -9,7 +9,7 @@
     
     <title>
         
-            Hello World |
+            数字IC前端设计——Makefile文件编写案例 |
         
         念恋叶语
     </title>
@@ -122,7 +122,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Hello World</span>
+            <span class="title-hover-animation">数字IC前端设计——Makefile文件编写案例</span>
         </div>
 
         
@@ -141,8 +141,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-08-04 10:33:26</span>
-        <span class="mobile">2022-08-04 10:33</span>
+        <span class="pc">2022-08-30 19:48:35</span>
+        <span class="mobile">2022-08-30 19:48</span>
     </span>
     
     
@@ -159,19 +159,12 @@
         
 
         <div class="article-content markdown-body">
-            <p>Welcome to <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html" >Writing<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/server.html" >Server<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html" >Generating<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
+            <h1 id="1-Makefile案例"><a href="#1-Makefile案例" class="headerlink" title="1 Makefile案例"></a>1 Makefile案例</h1><p>执行make默认执行comp</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">filelist  = file.f</span><br><span class="line">fsdnbfile = tb.fsdb</span><br><span class="line"></span><br><span class="line">comp : clean vcs</span><br><span class="line"></span><br><span class="line">vcs  :</span><br><span class="line">    vcs -R -full64 +v2k\</span><br><span class="line">    -fsdb +define+FSDB\</span><br><span class="line">    -sverilog\</span><br><span class="line">    -f $(filelist)\</span><br><span class="line">    -l run.log</span><br><span class="line">    </span><br><span class="line">## verdi:</span><br><span class="line">    verdi -f $(filelist)\</span><br><span class="line">    -ssf $(fsdbfile) &amp;</span><br><span class="line">    </span><br><span class="line">clean:</span><br><span class="line">    rm -rf *~\ *.log csrc\</span><br><span class="line">    simv*\ </span><br><span class="line">    ucli.key\</span><br><span class="line">    *.fsdb*</span><br></pre></td></tr></table></figure>
+<h1 id="2-文件详细解读"><a href="#2-文件详细解读" class="headerlink" title="2 文件详细解读"></a>2 文件详细解读</h1><h2 id="2-1-Makefile的基本格式"><a href="#2-1-Makefile的基本格式" class="headerlink" title="2.1 Makefile的基本格式"></a>2.1 Makefile的基本格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Makefile的基本格式</span><br><span class="line">target1 ...: prerequisites ...</span><br><span class="line">	command   # 注意在命令前面需要添加一个Tab键</span><br><span class="line">        ...</span><br><span class="line">target2 ...: prerequisites ...</span><br><span class="line">	command</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-Makefile变量引用"><a href="#2-2-Makefile变量引用" class="headerlink" title="2.2 Makefile变量引用"></a>2.2 Makefile变量引用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 定义变量1</span><br><span class="line">变量1 = 文件或者</span><br><span class="line"></span><br><span class="line"># 命令行中引用变量1</span><br><span class="line">target1 :</span><br><span class="line">    command $(变量1)</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-vcs编译仿真命令解读"><a href="#2-2-vcs编译仿真命令解读" class="headerlink" title="2.2 vcs编译仿真命令解读"></a>2.2 vcs编译仿真命令解读</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    vcs\</span><br><span class="line"># -R表示自动运行仿真</span><br><span class="line">    -R\</span><br><span class="line">    -full64\</span><br><span class="line"># +v2k表示支持 verilog 2001 标准</span><br><span class="line">    +v2k\</span><br><span class="line"># 文件前加FSDB定义并产生fsdb波形文件</span><br><span class="line">    -fsdb +define+FSDB\</span><br><span class="line"># 支持system Verilog</span><br><span class="line">    -sverilog\</span><br><span class="line"># 文件列表亦可以 -v列出所有v文件</span><br><span class="line">    -f $(filelist)\</span><br><span class="line"># 生成编译仿真log文件</span><br><span class="line">    -l run.log</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-verdi波形查看命令解读"><a href="#2-3-verdi波形查看命令解读" class="headerlink" title="2.3 verdi波形查看命令解读"></a>2.3 verdi波形查看命令解读</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    verdi\</span><br><span class="line">#文件列表</span><br><span class="line">    -f $(filelist)\</span><br><span class="line">#加载波形</span><br><span class="line">    -ssf $(fsdbfile) &amp;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -185,18 +178,33 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2022/08/30/%E6%95%B0%E5%AD%97IC%E5%89%8D%E7%AB%AF%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94Makefile%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E6%A1%88%E4%BE%8B/"
+                           href="/2022/08/30/%E6%95%B0%E5%AD%97IC%E5%89%8D%E7%AB%AF%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E4%BB%8E%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8vcs%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">数字IC前端设计——Makefile文件编写案例</span>
+                                <span class="post-nav-title-item">数字IC前端设计——从零基础入门vcs编译工具</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
                     </div>
                 
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/04/hello-world/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Hello World</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
                 
             </div>
         
