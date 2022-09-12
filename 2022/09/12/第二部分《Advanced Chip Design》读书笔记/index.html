@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Carl Zhao">
+    
+    <title>
+        
+            第二部分《Advanced Chip Design》读书笔记 |
+        
+        念恋叶语
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/lovewhisper.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"www.lovewhisper.top","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/Carl_Zhao.jpg","favicon":"/images/lovewhisper.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"念，是思念，也是想念。恋，是恋恋不舍，也是不恋恋不忘。"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/lovewhisper.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                念恋叶语
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                主页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">主页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">第二部分《Advanced Chip Design》读书笔记</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/Carl_Zhao.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Carl Zhao</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-09-12 21:57:37</span>
+        <span class="mobile">2022-09-12 21:57</span>
+    </span>
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第5章-数字电路设计——初级篇"><a href="#第5章-数字电路设计——初级篇" class="headerlink" title="第5章 数字电路设计——初级篇"></a>第5章 数字电路设计——初级篇</h1><ul>
+<li>n型晶体管生长在p型衬底上；p型晶体管生长在n型衬底上。</li>
+<li>反相器是一个p型晶体管与一个n型晶体管串联而成的。输出端：p型晶体管的漏极和n型晶体管的源极连接在一起。输入端：栅极连接在一起。p型晶体管的源极被连接到Vdd，n型晶体管的漏极连接到GND。</li>
+<li>在实际应用中，一般使用与非门、或非门。主要原因是采用CMOS工艺实现的与非门、或非门工作速度比与门和或门快得多。与非门和或非门被称为通用逻辑门，任何逻辑门都可以通过这两种门来实现。一般输入端口最多为4个或5个。</li>
+<li>缓冲门的输出逻辑值与输入相同，其功能是提供更大的驱动能力驱动多个负载。</li>
+<li>复杂门电路有助于减少芯片面积，提高电路工作速度。</li>
+<li>低电平噪声容限和高电平噪声容限</li>
+<li>扇入指一个逻辑门正常工作时输入端的数量，与具体的电路制造工艺和电路结构有关。扇出是在不降低输出电平的情况下逻辑门能够驱动的负载数量。</li>
+<li>建立时间，在时钟的上升沿之前D需要保持稳定的最短时间</li>
+<li>保持时间，在时钟的上升沿之后D需要保持稳定的最短时间</li>
+<li>亚稳态，当输入D在建立时间和保持时间窗口内发生变化，在此后的几乎一个时钟周期内，输出电平既不是0也不是1，处于不确定值。如果亚稳态输出被用于其他逻辑门的输入，那么将会造成难以预计的不良影响，可能会造成连锁反应，是整个数字系统工作不稳定。</li>
+<li>在只有一个时钟的数字系统中（单时钟域数字系统），通过控制一个D触发器的输出到另一个D触发器输入之间组合逻辑们的数量，可以减少其带来的延迟从而避免D触发器的输入在建立时间和保持时间窗口内发生波动。</li>
+<li>多时钟域系统，亚稳态的出现是无法避免的。</li>
+<li>门延迟，门输入发生变化时，需要经过一定的延迟才会出现输出变化。</li>
+<li>时钟偏移，同一个时钟到达不同的触发器的时钟引脚经历的路径可能存在差异，造成它们的时钟上升沿不是同时出现的，这种偏差成为时钟偏移</li>
+<li>边沿检测</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">//1 同步上升沿检测</span><br><span class="line">input sig_1;</span><br><span class="line"></span><br><span class="line">reg   sig_a_d1;</span><br><span class="line">wire  sig_a_risedge;</span><br><span class="line"></span><br><span class="line">always@(posedge clk or negedge rstb)</span><br><span class="line">begin</span><br><span class="line">    if(!rstb)</span><br><span class="line">        sig_a_d1&lt;=1&#x27;b0;</span><br><span class="line">    else</span><br><span class="line">        sig_a_d1&lt;=sig_a;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">assign sig_a_risedge = sig_a &amp; !sig_a_d1;</span><br><span class="line"></span><br><span class="line">//2 同步下降沿检测</span><br><span class="line">input sig_1;</span><br><span class="line"></span><br><span class="line">reg   sig_a_d1;</span><br><span class="line">wire  sig_a_faledge;</span><br><span class="line"></span><br><span class="line">always@(posedge clk or negedge rstb)</span><br><span class="line">begin</span><br><span class="line">    if(!rstb)</span><br><span class="line">        sig_a_d1&lt;=1&#x27;b0;</span><br><span class="line">    else</span><br><span class="line">        sig_a_d1&lt;=sig_a;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">assign sig_a_faledge = !sig_a &amp; sig_a_d1;</span><br><span class="line"></span><br><span class="line">//3 同步上升下降沿检测</span><br><span class="line">input sig_1;</span><br><span class="line"></span><br><span class="line">reg   sig_a_d1;</span><br><span class="line">wire  sig_a_faledge;</span><br><span class="line"></span><br><span class="line">always@(posedge clk or negedge rstb)</span><br><span class="line">begin</span><br><span class="line">    if(!rstb)</span><br><span class="line">        sig_a_d1&lt;=1&#x27;b0;</span><br><span class="line">    else</span><br><span class="line">        sig_a_d1&lt;=sig_a;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">assign sig_a_faledge = sig_a ^ sig_a_d1;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>行波进位加法器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//无进位</span><br><span class="line">sum_out   = a^b;</span><br><span class="line">carry_out = a&amp;b; </span><br><span class="line"></span><br><span class="line">//有进位</span><br><span class="line">sum_out   = a^b^c;</span><br><span class="line">carry_out = (a &amp; b)|((a ^ b) &amp; c); </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>超前进位加法器<br>仅根据当前的输入得到每一级的进位输出，速度更快，资源消耗更少。</p>
+</li>
+<li><p>乘法可以通过移位相加或移位相减来实现。</p>
+</li>
+</ul>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/09/12/%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E3%80%8AAdvanced%20Chip%20Design%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item"></span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/30/%E6%95%B0%E5%AD%97IC%E5%89%8D%E7%AB%AF%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E4%BB%8E%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8vcs%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">数字IC前端设计——从零基础入门vcs编译工具</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Carl Zhao</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            LoveWhisper&nbsp;|&nbsp;念恋叶语
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
