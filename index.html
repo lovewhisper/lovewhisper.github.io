@@ -38,14 +38,73 @@
 <main class="page-container">
 
     
-        <div class="first-screen-container flex-center fade-in-down-animation">
-    <div class="content flex-center">
-        <div class="description">
-            念，是思念，也是想念。恋，是恋恋不舍，也是不恋恋不忘。
-        </div>
-        
-    </div>
-</div>
+        $first-screen-font-size = 2rem;
+$first-screen-icon-size = 1.6rem;
+
+$temp-img = hexo-config('style.first_screen.background_img');
+$first-screen-img = $temp-img ? $temp-img:'/images/bg.svg';
+
+.first-screen-container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  background: url($first-screen-img) center center / cover no-repeat;
+  background-position-y: $header-height;
+
+
+  +keep-tablet() {
+    background-position-y: $header-height * 0.9;
+  }
+
+  +keep-mobile() {
+    background-position-y: $header-height * 0.8;
+  }
+
+  .content {
+    position: relative;
+    box-sizing: border-box;
+    width: 80%;
+    height: 90%;
+
+    .description {
+      font-weight: bold;
+      font-size: $first-screen-font-size;
+      line-height: 1.8;
+      text-align: center;
+      color: var(--default-text-color);
+
+
+      +keep-tablet() {
+        font-size: $first-screen-font-size * 0.9;
+      }
+    }
+
+
+    .s-icon-list {
+      position: absolute;
+      bottom: 0;
+      font-size: $first-screen-icon-size;
+      text-align: center;
+
+      +keep-tablet() {
+        font-size: $first-screen-icon-size * 0.9;
+      }
+
+      .s-icon-item {
+        margin-right: 20px;
+        cursor: pointer;
+        line-height: 2;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+      }
+
+    }
+  }
+}
 
     
 
@@ -301,35 +360,24 @@ Makefile
         </div>
 
         <div class="page-main-content-bottom">
-            .footer {
-  font-size: 1rem;
-  color: var(--third-text-color);
-
-
-  a {
-    color: var(--third-text-color);
-
-
-    &:hover {
-      color: var(--primary-color);
-
-    }
-  }
-
-  .info-container {
-    padding-bottom: 10px;
-    text-align: center;
-  }
-
-  .info-item {
-    margin: 5px 0;
-  }
-
-  .icon-animate {
-    animation: icon-animate 1.2s ease-in-out infinite;
-  }
-
-}
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Carl Zhao</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            LoveWhisper&nbsp;|&nbsp;念恋叶语
+        </div>
+        
+        
+    </div>
+</footer>
 
         </div>
     </div>
