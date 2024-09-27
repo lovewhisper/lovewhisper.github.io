@@ -8,7 +8,7 @@
       <link href="/2024/09/27/8-Real2Gray-Array/"/>
       <url>/2024/09/27/8-Real2Gray-Array/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>数组在一定程度上可以代替 for 循环实行并行处理，实现矢量化加速。</p></blockquote><p>在工作过程中，遇到 "遗传算法如果因为意外情况中断了，如何恢复？" 的问题。</p><p>首先，需要记录优化结果对应的最优解.</p><p>然后，最优解编码后用于代替随机初始化基因序列。</p><p>这个过程为了实现矢量化并行加速，需要将输入的数组传递进编码系统进行编码处理。</p><h2 id="代码">代码</h2><p>以下代码展示的参数均为数组形式。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">real2gray</span>(<span class="params">lb, ub, precision, x</span>):</span><br><span class="line">    len_single_Chrom = <span class="built_in">int</span>(np.ceil(np.log2((ub-lb)/precision+<span class="number">1</span>)))</span><br><span class="line">    y = np.<span class="built_in">round</span>((x-lb)/precision)</span><br><span class="line">    bin_list=[]</span><br><span class="line">    bin_offset = []</span><br><span class="line">    bin_offset.append(np.zeros(<span class="built_in">len</span>(y)))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(len_single_Chrom):</span><br><span class="line">        binary_list = np.logspace(start=(len_single_Chrom-<span class="number">1</span>-i),stop=<span class="number">0</span>,base=<span class="number">2</span>,num=(len_single_Chrom-i))</span><br><span class="line">        binary_array = np.cumsum(binary_list)</span><br><span class="line">        one_mode = ((y &gt;= (<span class="number">2</span>**(len_single_Chrom-i-<span class="number">1</span>))) &amp; (binary_array[<span class="number">0</span>] &lt;= y)) </span><br><span class="line">        <span class="built_in">bin</span> = np.where(one_mode, <span class="number">1</span> , <span class="number">0</span>)</span><br><span class="line">        bin_list.append(<span class="built_in">bin</span>)</span><br><span class="line">        bin_offset.append(<span class="built_in">bin</span>)</span><br><span class="line">        y = np.where(y - (<span class="number">2</span>**(len_single_Chrom-i-<span class="number">1</span>))&gt;=<span class="number">0</span>, y - (<span class="number">2</span>**(len_single_Chrom-i-<span class="number">1</span>)),y)</span><br><span class="line">    bin_list = np.array(bin_list).T</span><br><span class="line">    bin_offset = np.array(bin_offset[:-<span class="number">1</span>]).T</span><br><span class="line">    gray_v = np.where(bin_list==bin_offset, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> gray_v</span><br></pre></td></tr></table></figure><p>这个问题其实对于多阶段优化也非常重要。</p><blockquote><p>⚓ Carl Zhao<br> 🏢 逍遥科技有限公司<br> 💭 曾经也是追光少年，然而少年归来已不再是少年，但依然在追光的路上。 <br>📧 邮箱：1005513510@qq.com</p></blockquote>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>数组在一定程度上可以代替 for 循环实行并行处理，实现矢量化加速。</p></blockquote><p>在工作过程中，遇到 "遗传算法如果因为意外情况中断了，如何恢复？" 的问题。</p><p>首先，需要记录优化结果对应的最优解.</p><p>然后，最优解编码后用于代替随机初始化基因序列。</p><p>这个过程为了实现矢量化并行加速，需要将输入的数组传递进编码系统进行编码处理。</p><h2 id="代码">代码</h2><p>以下代码展示的参数均为数组形式。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">real2gray</span>(<span class="params">lb, ub, precision, x</span>):</span><br><span class="line">    len_single_Chrom = <span class="built_in">int</span>(np.ceil(np.log2((ub-lb)/precision+<span class="number">1</span>)))</span><br><span class="line">    y = np.<span class="built_in">round</span>((x-lb)/precision)</span><br><span class="line">    bin_list=[]</span><br><span class="line">    bin_offset = []</span><br><span class="line">    bin_offset.append(np.zeros(<span class="built_in">len</span>(y)))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(len_single_Chrom):</span><br><span class="line">        binary_list = np.logspace(start=(len_single_Chrom-<span class="number">1</span>-i),stop=<span class="number">0</span>,base=<span class="number">2</span>,num=(len_single_Chrom-i))</span><br><span class="line">        binary_array = np.cumsum(binary_list)</span><br><span class="line">        one_mode = ((y &gt;= (<span class="number">2</span>**(len_single_Chrom-i-<span class="number">1</span>))) &amp; (binary_array[<span class="number">0</span>] &lt;= y)) </span><br><span class="line">        <span class="built_in">bin</span> = np.where(one_mode, <span class="number">1</span> , <span class="number">0</span>)</span><br><span class="line">        bin_list.append(<span class="built_in">bin</span>)</span><br><span class="line">        bin_offset.append(<span class="built_in">bin</span>)</span><br><span class="line">        y = np.where(y - (<span class="number">2</span>**(len_single_Chrom-i-<span class="number">1</span>))&gt;=<span class="number">0</span>, y - (<span class="number">2</span>**(len_single_Chrom-i-<span class="number">1</span>)),y)</span><br><span class="line">    bin_list = np.array(bin_list).T</span><br><span class="line">    bin_offset = np.array(bin_offset[:-<span class="number">1</span>]).T</span><br><span class="line">    gray_v = np.where(bin_list==bin_offset, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> gray_v</span><br></pre></td></tr></table></figure><p>上述代码中 len_single_Chrom 为数字，进一步改进成数组。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">real2gray</span>(<span class="params">len_single_Chrom, init_X, lb, ub, precision</span>):</span><br><span class="line">    y = np.<span class="built_in">round</span>((init_X-lb)/precision)</span><br><span class="line">    bin_list=[]</span><br><span class="line">    bin_offset = []</span><br><span class="line">    bin_offset.append(np.zeros(<span class="built_in">len</span>(y)))</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> (len_single_Chrom==<span class="number">0</span>).<span class="built_in">all</span>() :</span><br><span class="line">        binary_list = np.logspace(start=(len_single_Chrom-<span class="number">1</span>),stop=<span class="number">0</span>,base=<span class="number">2</span>,num=np.<span class="built_in">max</span>(len_single_Chrom))</span><br><span class="line">        binary_array = binary_list.cumsum(axis=<span class="number">0</span>)</span><br><span class="line">        one_mode = ((y &gt;= (<span class="number">2</span>**(len_single_Chrom-<span class="number">1</span>))) &amp; (binary_array[<span class="number">0</span>] &lt;= y)) </span><br><span class="line">        <span class="built_in">bin</span> = np.where(one_mode, <span class="number">1</span> , <span class="number">0</span>)</span><br><span class="line">        bin_list.append(<span class="built_in">bin</span>)</span><br><span class="line">        bin_offset.append(<span class="built_in">bin</span>)</span><br><span class="line">        y = np.where(y - (<span class="number">2</span>**(len_single_Chrom-<span class="number">1</span>))&gt;=<span class="number">0</span>, y - (<span class="number">2</span>**(len_single_Chrom-<span class="number">1</span>)),y)</span><br><span class="line">        len_single_Chrom = np.int64(np.where(len_single_Chrom&gt;<span class="number">0</span>, len_single_Chrom-<span class="number">1</span>, <span class="number">0</span>))</span><br><span class="line">    bin_list = np.array(bin_list).T</span><br><span class="line">    bin_offset = np.array(bin_offset[:-<span class="number">1</span>]).T</span><br><span class="line">    gray_v = np.where(bin_list==bin_offset, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> gray_v</span><br></pre></td></tr></table></figure><p>这个问题的解决对于多阶段优化也非常重要。</p><blockquote><p>⚓ Carl Zhao<br> 🏢 逍遥科技有限公司<br> 💭 曾经也是追光少年，然而少年归来已不再是少年，但依然在追光的路上。 <br>📧 邮箱：1005513510@qq.com</p></blockquote>]]></content>
       
       
       <categories>
@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> 编码解码 </tag>
-            
             <tag> 格雷码 </tag>
+            
+            <tag> 编码解码 </tag>
             
         </tags>
       
@@ -76,9 +76,9 @@
       
         <tags>
             
-            <tag> 编码解码 </tag>
-            
             <tag> 格雷码 </tag>
+            
+            <tag> 编码解码 </tag>
             
         </tags>
       
@@ -139,31 +139,6 @@
     
     
     <entry>
-      <title>萤火之森</title>
-      <link href="/2024/09/15/3_Firefly_Forest/"/>
-      <url>/2024/09/15/3_Firefly_Forest/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>有幸，如果你有看到这篇分享，哪怕是不经意的误入；<br> 有幸，如果你也看过《萤火之森》，哪怕已经忘记故事情节;<br> 有幸，如果你发现这是跨越成长的对话;</p></blockquote><p>年幼，相遇，在老家屋后的神秘森林；</p><p>迷路，啼哭，人类的小孩那么可怜。</p><p>带着面具，有趣，说他是妖怪；</p><p>可怜，却又可恶，非要触碰我的身体。</p><p>好奇，回家问过关于森林所有的故事，没人了解，带着面具的妖怪；</p><p>假装睡着，但眼睛一直睁着，看着你。</p><p>忍不住，摘下你的面具，你的脸庞与人类无异；</p><p>第一次感受人类的温度，那么亲近，即使隔着面具。</p><p>你的脸庞在我心底第一次留下烙印，从未想过，在之后的岁月里，都再也难以忘记；</p><p>第一次动了心，却假装镇定，人类的温度是那么有吸引力。</p><p>突然喜欢上夏天，因为夏天有你；</p><p>即使不冷，也爱在冬季戴上围巾，你送的围巾，有人类的温暖。</p><p>你摘下面具，还是初见的模样，而这些年里，我已不再是第一次相遇在森林时的幼稚孩童；</p><p>这些年见证你的成长，那个初见啼哭的幼童，已长成我喜欢的模样，内心再也不能平静。</p><p>那日路滑，扶着同学的手走过，想到你；</p><p>和你并肩走在森林，听你讲未来的规划，有我足矣。</p><p>毕业后，希望回到老家工作，这样就可以常常见到你，哪怕只是并肩，只希望可以一直走下去；</p><p>有相遇就会由分离，即使再怎么不愿意。</p><p>有人类参与的仪式，会很但心；</p><p>看着你笑得很开心，我想我已做好所有决定，但抱歉没告诉你。</p><p>扶起小孩，看你逐渐消失，抱得更紧；</p><p>第一次也是最后一次抱你，没有难过，用力去笑，把最美的瞬间留给你。</p><p>明明知道，那是人类小孩，却还去触碰；</p><p>不忍心去触碰你，怕你余生会怪自己。</p><p>如果不去扶那个小孩，那就不是你；</p><p>谢谢你，哪怕只是一次拥抱，也很开心。</p><p>感恩生命，让我们在最美的时光相遇，爱而不得也是一种美丽；</p><p>遇见你，已是有幸，记得森林里依旧有我们曾经一起走过留下的气息。</p><blockquote><p>⚓ Carl Zhao<br>🏢 逍遥科技有限公司<br>💭 曾经也是追光少年，然而少年归来已不再是少年，但依然在追光的路上。<br>📧 邮箱：1005513510@qq.com</p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> 念恋分享 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 动漫 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>隐秘在角落里的坏小孩</title>
       <link href="/2024/09/15/4_book_bad_boy/"/>
       <url>/2024/09/15/4_book_bad_boy/</url>
@@ -183,6 +158,31 @@
             <tag> 小说 </tag>
             
             <tag> 网剧 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>萤火之森</title>
+      <link href="/2024/09/15/3_Firefly_Forest/"/>
+      <url>/2024/09/15/3_Firefly_Forest/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>有幸，如果你有看到这篇分享，哪怕是不经意的误入；<br> 有幸，如果你也看过《萤火之森》，哪怕已经忘记故事情节;<br> 有幸，如果你发现这是跨越成长的对话;</p></blockquote><p>年幼，相遇，在老家屋后的神秘森林；</p><p>迷路，啼哭，人类的小孩那么可怜。</p><p>带着面具，有趣，说他是妖怪；</p><p>可怜，却又可恶，非要触碰我的身体。</p><p>好奇，回家问过关于森林所有的故事，没人了解，带着面具的妖怪；</p><p>假装睡着，但眼睛一直睁着，看着你。</p><p>忍不住，摘下你的面具，你的脸庞与人类无异；</p><p>第一次感受人类的温度，那么亲近，即使隔着面具。</p><p>你的脸庞在我心底第一次留下烙印，从未想过，在之后的岁月里，都再也难以忘记；</p><p>第一次动了心，却假装镇定，人类的温度是那么有吸引力。</p><p>突然喜欢上夏天，因为夏天有你；</p><p>即使不冷，也爱在冬季戴上围巾，你送的围巾，有人类的温暖。</p><p>你摘下面具，还是初见的模样，而这些年里，我已不再是第一次相遇在森林时的幼稚孩童；</p><p>这些年见证你的成长，那个初见啼哭的幼童，已长成我喜欢的模样，内心再也不能平静。</p><p>那日路滑，扶着同学的手走过，想到你；</p><p>和你并肩走在森林，听你讲未来的规划，有我足矣。</p><p>毕业后，希望回到老家工作，这样就可以常常见到你，哪怕只是并肩，只希望可以一直走下去；</p><p>有相遇就会由分离，即使再怎么不愿意。</p><p>有人类参与的仪式，会很但心；</p><p>看着你笑得很开心，我想我已做好所有决定，但抱歉没告诉你。</p><p>扶起小孩，看你逐渐消失，抱得更紧；</p><p>第一次也是最后一次抱你，没有难过，用力去笑，把最美的瞬间留给你。</p><p>明明知道，那是人类小孩，却还去触碰；</p><p>不忍心去触碰你，怕你余生会怪自己。</p><p>如果不去扶那个小孩，那就不是你；</p><p>谢谢你，哪怕只是一次拥抱，也很开心。</p><p>感恩生命，让我们在最美的时光相遇，爱而不得也是一种美丽；</p><p>遇见你，已是有幸，记得森林里依旧有我们曾经一起走过留下的气息。</p><blockquote><p>⚓ Carl Zhao<br>🏢 逍遥科技有限公司<br>💭 曾经也是追光少年，然而少年归来已不再是少年，但依然在追光的路上。<br>📧 邮箱：1005513510@qq.com</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 念恋分享 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 动漫 </tag>
             
         </tags>
       
