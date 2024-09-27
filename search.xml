@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>格雷码转实数【数组】</title>
+      <link href="/2024/09/27/8-Real2Gray-Array/"/>
+      <url>/2024/09/27/8-Real2Gray-Array/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>数组在一定程度上可以代替 for 循环实行并行处理，实现矢量化加速。</p></blockquote><p>在工作过程中，遇到 "遗传算法如果因为意外情况中断了，如何恢复？" 的问题。</p><p>首先，需要记录优化结果对应的最优解.</p><p>然后，最优解编码后用于代替随机初始化基因序列。</p><p>这个过程为了实现矢量化并行加速，需要将输入的数组传递进编码系统进行编码处理。</p><h2 id="代码">代码</h2><p>以下代码展示的参数均为数组形式。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">real2gray</span>(<span class="params">lb, ub, precision, x</span>):</span><br><span class="line">    len_single_Chrom = <span class="built_in">int</span>(np.ceil(np.log2((ub-lb)/precision+<span class="number">1</span>)))</span><br><span class="line">    y = np.<span class="built_in">round</span>((x-lb)/precision)</span><br><span class="line">    bin_list=[]</span><br><span class="line">    bin_offset = []</span><br><span class="line">    bin_offset.append(np.zeros(<span class="built_in">len</span>(y)))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(len_single_Chrom):</span><br><span class="line">        binary_list = np.logspace(start=(len_single_Chrom-<span class="number">1</span>-i),stop=<span class="number">0</span>,base=<span class="number">2</span>,num=(len_single_Chrom-i))</span><br><span class="line">        binary_array = np.cumsum(binary_list)</span><br><span class="line">        one_mode = ((y &gt;= (<span class="number">2</span>**(len_single_Chrom-i-<span class="number">1</span>))) &amp; (binary_array[<span class="number">0</span>] &lt;= y)) </span><br><span class="line">        <span class="built_in">bin</span> = np.where(one_mode, <span class="number">1</span> , <span class="number">0</span>)</span><br><span class="line">        bin_list.append(<span class="built_in">bin</span>)</span><br><span class="line">        bin_offset.append(<span class="built_in">bin</span>)</span><br><span class="line">        y = np.where(y - (<span class="number">2</span>**(len_single_Chrom-i-<span class="number">1</span>))&gt;=<span class="number">0</span>, y - (<span class="number">2</span>**(len_single_Chrom-i-<span class="number">1</span>)),y)</span><br><span class="line">    bin_list = np.array(bin_list).T</span><br><span class="line">    bin_offset = np.array(bin_offset[:-<span class="number">1</span>]).T</span><br><span class="line">    gray_v = np.where(bin_list==bin_offset, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> gray_v</span><br></pre></td></tr></table></figure><p>这个问题其实对于多阶段优化也非常重要。</p><blockquote><p>⚓ Carl Zhao<br> 🏢 逍遥科技有限公司<br> 💭 曾经也是追光少年，然而少年归来已不再是少年，但依然在追光的路上。 <br>📧 邮箱：1005513510@qq.com</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 念恋不忘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编码解码 </tag>
+            
+            <tag> 格雷码 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>基于开源 fdfd 求解器 ceviche 的参数化仿真模型创建</title>
       <link href="/2024/09/27/7-ceviche-1x2-structure/"/>
       <url>/2024/09/27/7-ceviche-1x2-structure/</url>
