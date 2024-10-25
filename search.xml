@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Python 中跨脚本处理全局变量</title>
+      <link href="/2024/10/25/14-python-global-variable/"/>
+      <url>/2024/10/25/14-python-global-variable/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Python 中跨脚本传递全局变量的方式多种多样，这里介绍一种比较优雅的方式。</p></blockquote><h4 id="两个脚本数据交互">两个脚本数据交互</h4><p>脚本 1 中定义并初始化全局变量，并且定义全局变量赋值取值函数。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_global_dict</span>():</span><br><span class="line">    <span class="keyword">global</span> _gd</span><br><span class="line">    _gd = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">set_value</span>(<span class="params">key, value</span>):</span><br><span class="line">    _gd[key] = value</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_value</span>(<span class="params">key</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> _gd[key]</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;读取&#123;&#125;失败&quot;</span>.<span class="built_in">format</span>(key),e)</span><br><span class="line"></span><br><span class="line">_global_dict()</span><br></pre></td></tr></table></figure><p>脚本 2 中，直接导入脚本 1 即可实现初始化。</p><h4 id="多脚本交互">多脚本交互</h4><p>专门设定一个脚本用于存放处理全局变量。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_global_dict</span>():</span><br><span class="line">    <span class="keyword">global</span> _gd</span><br><span class="line">    _gd = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">set_value</span>(<span class="params">key, value</span>):</span><br><span class="line">    _gd[key] = value</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_value</span>(<span class="params">key</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> _gd[key]</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;读取&#123;&#125;失败&quot;</span>.<span class="built_in">format</span>(key),e)</span><br></pre></td></tr></table></figure><p>需要注意的是，初始化函数只需要在任意脚本中执行一次即可。</p><p>在任意脚本导入该脚本，即可实现全局变量自由流转。</p><h4 id="更多方法">更多方法</h4><p>用文件作为存储流转数据的中间环节，例如 json 文件，在此不再一一叙述。</p><blockquote><p>⚓ Carl Zhao<br> 🏢 逍遥科技有限公司<br> 💭 曾经也是追光少年，然而少年归来已不再是少年，但依然在追光的路上。<br> 📧 邮箱：1005513510@qq.com</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 念恋不忘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> 全局变量 </tag>
+            
+            <tag> 跨脚本 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>集成光子预测系统（IPPC）</title>
       <link href="/2024/10/24/13-Integrated-Photonic-Prediction-System/"/>
       <url>/2024/10/24/13-Integrated-Photonic-Prediction-System/</url>
@@ -263,9 +292,9 @@
       
         <tags>
             
-            <tag> 电影 </tag>
-            
             <tag> 小说 </tag>
+            
+            <tag> 电影 </tag>
             
         </tags>
       
