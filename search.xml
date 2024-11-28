@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>通过 vscode ssh 远程连接 ARM linux</title>
+      <link href="/2024/11/28/18-none-linux-install-vscode/"/>
+      <url>/2024/11/28/18-none-linux-install-vscode/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>近日，在使用 RK3588 时，移植的精简 Linux 既没有 apt 等安装工具，同时也没有 C 编译器。 这样就需要首先再 PC 端使用交叉编译通过后，将编译的文件传到 RK3588 上才能使用。</p></blockquote><h4 id="遇到问题">1 遇到问题</h4><p>RK3588 通过 buildroot 定制的 Linux 啥安装工具也没有，必须使用源码编译才能安装必须的软件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt</span><br><span class="line">dpkg</span><br><span class="line">rpm</span><br><span class="line">yum</span><br></pre></td></tr></table></figure><p>然而，源码编译在 ARM 端无法通过，因为 ARM 没有编译工具。同时，由于 ARM 端没有安装工具无法安装 C 编译器。</p><p>同时，该定制版本 Linux 中的 tar 压缩解压工具由于版本问题无法实现 tar.gz 文件的解压，导致很多问题的产生。例如，通过 vscode 无法 ssh 远程 ARM 端。</p><h4 id="解决思路">2 解决思路</h4><p>要想解决上述问题，有两条可行的道路，要不重新移植 Linux，要不通过交叉编译实现 ARM 端软件工具的安装。</p><p>重新移植 Linux 无论是时间成本还是技术成本上而言，都是特别高的，而且容易一步错、步步错。</p><p>交叉编译环境的搭建无论是哪种方案都需要去做的，于是，我们选取了通过交叉编译实现 ARM 端软件工具的安装。</p><h4 id="手到擒来">3 手到擒来</h4><p>老版本 tar 工具在使用 -zxvf 指令时总会报 -z 不是可用的配置项。</p><p>首先，下载新版本 tar 源码包，在 PC 端使用交叉编译工具编译，最终会在 result/bin 文件夹下生成 tar 文件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf tar-1.27.1.tar.gz </span><br><span class="line"><span class="built_in">cd</span> tar-1.27.1 </span><br><span class="line"><span class="built_in">mkdir</span> result</span><br><span class="line">CC=aarch64-buildroot-linux-gnu-gcc ./configure  --prefix=`<span class="built_in">pwd</span>`/result  --host=arm-linux </span><br><span class="line">make clean &amp;&amp; make &amp;&amp; make install</span><br></pre></td></tr></table></figure><p>生成的 tar 文件，通过 ssh 传递至 ARM 端。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ./result/bin/tar root@ip:/</span><br></pre></td></tr></table></figure><p>然后，连接至 ARM 端，进行删除 usr/bin 下原来的 tar，移动新编译的 tar 至 usr/bin 文件下，即可实现 tar 的更新。</p><p>需要注意的是，最好是别直接删除原来的文件，可以备份防止意外。</p><h4 id="回归重点">4 回归重点</h4><p>更新 tar 后，发现 vscode 可以 ssh 连接 ARM 端了。</p><p>原因很简单，vscode 连接远程时，会从服务器下载 tar.gz 的文件，然后这个文件在 ARM 本地无法解压，于是就报错了。</p><p>更新 tar 后就不存在问题了。</p><p>当然，vscode 感觉可以在本地 PC 解压后 ssh 传递至 ARM 设备，这样也能保证 ARM 设备在没有联网的情况下正常安装可能是更好的方案。</p><blockquote><p>⚓ Carl Zhao<br> 🏢 逍遥科技有限公司<br> 💭 曾经也是追光少年，然而少年归来已不再是少年，但依然在追光的路上。<br> 📧 邮箱：1005513510@qq.com</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 念恋不忘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> ARM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>光子学智能变量优化工具( PIVOT )用户手册</title>
       <link href="/2024/11/11/17-PIVOT-User-Guide/"/>
       <url>/2024/11/11/17-PIVOT-User-Guide/</url>
