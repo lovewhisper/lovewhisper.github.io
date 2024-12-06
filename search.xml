@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>YOLOv5 单目标分类简明教程</title>
+      <link href="/2024/12/06/19-yolov5/"/>
+      <url>/2024/12/06/19-yolov5/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>YOLOv5 能够实现快速的目标检测，适合需要实时处理的应用场景。</p></blockquote><h4 id="安装">1 安装</h4><p>从 Github 上下载并安装运行需要使用的依赖，</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ultralytics/yolov5</span><br><span class="line"><span class="built_in">cd</span> ./yolov5</span><br><span class="line">%pip install -qr requirements.txt </span><br></pre></td></tr></table></figure><p>验证是否可以正常运行，</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> utils</span><br><span class="line">display = utils.notebook_init()  <span class="comment"># checks</span></span><br></pre></td></tr></table></figure><p>终端显示输出安装环境的状态信息以及计算机的相关信息，即可正常运行。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YOLOv5  2024-12-5 Python-3.8.20 torch-2.4.1+cpu CPU</span><br><span class="line">Setup complete  (20 CPUs, 31.7 GB RAM, 59.3/84.1 GB disk)</span><br></pre></td></tr></table></figure><p>YOLOv5 可以实现目标分类与目标识别，下面简单介绍下目标分类的实现。</p><h4 id="推理">2 推理</h4><p>终端运行推理脚本，配置与训练模型与需要分类的数据。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!python classify/predict.py --weights yolov5s-cls.pt --img 224 --<span class="built_in">source</span> data/images</span><br></pre></td></tr></table></figure><p>可以通过以下脚本显示推理后的数据。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display.Image(filename=<span class="string">&#x27;runs/predict-cls/exp/zidane.jpg&#x27;</span>, width=<span class="number">600</span>)</span><br></pre></td></tr></table></figure><h4 id="验证">3 验证</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!python classify/val.py --weights yolov5s-cls.pt --data ../datasets/imagenet --img 224 --half</span><br></pre></td></tr></table></figure><h4 id="训练">4 训练</h4><p>对于单目标分类问题，不需要打标签，只需要将同一分类放到同一文件夹即可。</p><p>同时，修改训练脚本中有关数据集的选项即可。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&quot;--data&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;imagenette160&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;cifar10, cifar100, mnist, imagenet, ...&quot;</span>)</span><br></pre></td></tr></table></figure><p>也可以在执行脚本时，指定参数。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!python classify/train.py --model yolov5s-cls.pt --data imagenette160 --epochs 5 --img 224 --cache</span><br></pre></td></tr></table></figure><p>以上就是使用 YOLOv5 进行单目标分类问题的简明教程。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 念恋不忘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> YOLO </tag>
+            
+            <tag> 单目标分类 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>通过 vscode ssh 远程连接 ARM linux</title>
       <link href="/2024/11/28/18-none-linux-install-vscode/"/>
       <url>/2024/11/28/18-none-linux-install-vscode/</url>
