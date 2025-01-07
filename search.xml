@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>紫光同创 FPGA 开发之 PDS 在线逻辑分析仪使用方法</title>
+      <link href="/2025/01/07/24-PDS-Debug/"/>
+      <url>/2025/01/07/24-PDS-Debug/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>在 FPGA 开发过程中，使用在线逻辑分析仪对信号波形分析可以有效排除故障，是 FPGA 学习开发过程中不可或缺的重要技能。</p></blockquote><p>紫光同创 FPGA 开发过程中，支持两种添加在线逻辑分析仪的方法，分别是可视化操作界面添加和 Verilog 中添加。</p><h4 id="可视化操作">1 可视化操作</h4><p>在 TOOL 工具栏选择 Inserter 配置信号，选择 JtagHub 目录下 DebugCore 即可进行配置。</p><p>需要分别配置 Trigger Parameters、Net Connections、PowerOn Init Parameters 三栏，其中具体信号配置在 Net Connections 下。</p><p>为防止综合时优化，需要在 RTL 代码中相关信号部分添加以下内容，从而防止综合工具优化。</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span>  A <span class="comment">/*synthesis syn_preserve=1*/</span>; </span><br><span class="line"><span class="keyword">wire</span> B <span class="comment">/*synthesis syn_keep=1*/</span>    ; </span><br></pre></td></tr></table></figure><h4 id="代码插入">2 代码插入</h4><p>按照信号种类增加相应说明即可，主要分为时钟信号、复位信号，其他的触发信号只需要简写即可。</p><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">input</span> clk <span class="comment">/* synthesis PAP_MARK_DEBUG=&quot;&lt;0/c0/0&gt;&quot; */</span>, </span><br><span class="line"><span class="keyword">input</span> rst <span class="comment">/* synthesis PAP_MARK_DEBUG=&quot;&lt;1/r0/0&gt;&quot; */</span>,</span><br><span class="line"><span class="keyword">input</span>  A <span class="comment">/* synthesis PAP_MARK_DEBUG=&quot;true&quot; */</span>， </span><br><span class="line"><span class="keyword">output</span> B <span class="comment">/* synthesis PAP_MARK_DEBUG=&quot;true&quot; */</span>，</span><br><span class="line"><span class="keyword">reg</span>  A  <span class="comment">/* synthesis PAP_MARK_DEBUG=&quot;true&quot; */</span>;  </span><br><span class="line"><span class="keyword">wire</span> B  <span class="comment">/* synthesis PAP_MARK_DEBUG=&quot;true&quot; */</span>; </span><br></pre></td></tr></table></figure><p>然后，同样的方式打开上述 Inserter 选项查看配置结果即可。</p><h4 id="总结">3 总结</h4><p>实际使用过程中来说，更推荐 RTL 代码插入的方式，这样不需要太多关注综合会优化掉的部分信号。</p><p>此外，打开 Inserter 后会自行进行综合，实际使用过程中还是会遇到一些新增需要分析的信号无法更新的问题，此时，手动重新编译下，再打开工具就会正常。</p><blockquote><p>⚓ Carl Zhao<br> 📧 邮箱：1005513510@qq.com<br> 💭 曾经也是追光少年，然而少年归来已不再是少年，但依然在追光的路上。<br></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 念恋不忘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> PDS </tag>
+            
+            <tag> FPGA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>RK3588 设备上 Linux 根文件系统的移植</title>
       <link href="/2024/12/27/23-first-to-learn-linux/"/>
       <url>/2024/12/27/23-first-to-learn-linux/</url>
@@ -99,9 +126,9 @@
       
         <tags>
             
-            <tag> FPGA </tag>
-            
             <tag> PDS </tag>
+            
+            <tag> FPGA </tag>
             
         </tags>
       
