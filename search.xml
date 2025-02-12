@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>OrCAD 绘制原理图之创建 FPGA 元件库</title>
+      <link href="/2025/02/12/26-OrCAD-device-library/"/>
+      <url>/2025/02/12/26-OrCAD-device-library/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>最近，由于项目需要，学习使用 OrCAD 绘制原理图，遂记录一下过程。</p></blockquote><p>一般而言，绘制原理图，分为三步，确认设计、创建元件库、连接关系。</p><p>绘制原理图的器件库核心就是器件有多少引脚，分别代表什么。当主控器件引脚比较多时，创建元件库就会变得非常复杂。</p><p>以 Xilinx 7系列 FPGA 为例，需要下载手册《ug475_7Series_Pkg_Pinout》，从中获取对应器件的 pin 脚分布文件。</p><p>目前，官方提供的 pin 脚分布文件为 txt 格式，《https://www.xilinx.com/support/packagefiles/k7packages/xc7k420tffg1156pkg.txt》提供的信息如下：</p><table><colgroup><col style="width: 12%" /><col style="width: 12%" /><col style="width: 12%" /><col style="width: 12%" /><col style="width: 12%" /><col style="width: 12%" /><col style="width: 12%" /><col style="width: 12%" /></colgroup><thead><tr class="header"><th>Pin</th><th>Pin Name</th><th>Memory Byte Group</th><th>Bank</th><th>VCCAUX Group</th><th>Super Logic Region</th><th>I/O Type</th><th>No-Connect</th></tr></thead><tbody></tbody></table><p>在 OrCAD 中，需要将上述信息重新调整从而导入自动生成器件。</p><table><thead><tr class="header"><th>Pin</th><th>Name</th><th>Type</th><th>NA</th><th>Shape</th><th>NA</th><th>Position</th><th>Section</th></tr></thead><tbody></tbody></table><p>需要注意得是，Name 可以采用下载 txt 文件中的 Name_Pin 作为导入 name，因为 Xilinx 提供的文件中有一些 pin 脚名称一致，生成器件库时会报 Warning。</p><p>另外设计原理图时 Type 都可以设置成 Passive，当然正确的做法是按照设计选择 pin 脚类型，电源和地设计成 Power，一般引脚设计为 Passive。</p><p>两列 NA 为用不到的信息，分别为引脚是否显示，一般不设置就为显示。另一个为 PinGroup，没有留空即可。</p><p>然后，Position 可以设置为上下左右，合理分布 pin 脚即可。</p><p>最后，按照 Bank 划分器件，因为 FPGA 一般引脚特别多，可以选择将器件划分成多块，实际上还是一个整体，只是设计更加清晰。例如 XC7K420T 一共有 16 组 IO Bank，一组 Config Bank，接地信号单独划分为一组，高速资源供电单独一组，供电一组，一共可以划分成 20 个 Bank。</p><p>按照上述重新生成新表后，在软件中创建库后选择 New Part Creation Spreadsheet。首先，设置器件名称以及分块数，然后将上述内容复制进表中即可。</p><p>分块数必须在复制前设置好，否则默认为 1 复制会丢失部分分块信息。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 念恋不忘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> OrCAD </tag>
+            
+            <tag> 元件库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>接口全损 U 盘拯救数据记</title>
       <link href="/2025/01/14/25-repair-U-pan/"/>
       <url>/2025/01/14/25-repair-U-pan/</url>
@@ -74,9 +103,9 @@
       
         <tags>
             
-            <tag> ARM </tag>
-            
             <tag> Linux </tag>
+            
+            <tag> ARM </tag>
             
         </tags>
       
@@ -209,9 +238,9 @@
       
         <tags>
             
-            <tag> ARM </tag>
-            
             <tag> Linux </tag>
+            
+            <tag> ARM </tag>
             
         </tags>
       
@@ -585,9 +614,9 @@
       
         <tags>
             
-            <tag> 电影 </tag>
-            
             <tag> 小说 </tag>
+            
+            <tag> 电影 </tag>
             
         </tags>
       
