@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>RK3588 平台部署 DeepSeek-R1 大模型之 CPU 篇</title>
+      <title>RK3588 平台本地部署 DeepSeek-R1 大模型之 CPU 篇</title>
       <link href="/2025/02/20/27-DeepSeek-RK3588-CPU/"/>
       <url>/2025/02/20/27-DeepSeek-RK3588-CPU/</url>
       
@@ -533,9 +533,9 @@
       
         <tags>
             
-            <tag> 格雷码 </tag>
-            
             <tag> 编码解码 </tag>
+            
+            <tag> 格雷码 </tag>
             
         </tags>
       
@@ -589,9 +589,9 @@
       
         <tags>
             
-            <tag> 格雷码 </tag>
-            
             <tag> 编码解码 </tag>
+            
+            <tag> 格雷码 </tag>
             
         </tags>
       
