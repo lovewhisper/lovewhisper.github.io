@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>28-DeepSeek-Rk3588-NPU</title>
+      <title>RK3588 平台本地部署 DeepSeek-R1 大模型之 NPU 篇</title>
       <link href="/2025/02/20/28-DeepSeek-Rk3588-NPU/"/>
       <url>/2025/02/20/28-DeepSeek-Rk3588-NPU/</url>
       
@@ -130,9 +130,9 @@
       
         <tags>
             
-            <tag> FPGA </tag>
-            
             <tag> PDS </tag>
+            
+            <tag> FPGA </tag>
             
         </tags>
       
@@ -236,9 +236,9 @@
       
         <tags>
             
-            <tag> FPGA </tag>
-            
             <tag> PDS </tag>
+            
+            <tag> FPGA </tag>
             
         </tags>
       
@@ -668,9 +668,9 @@
       
         <tags>
             
-            <tag> 电影 </tag>
-            
             <tag> 小说 </tag>
+            
+            <tag> 电影 </tag>
             
         </tags>
       
