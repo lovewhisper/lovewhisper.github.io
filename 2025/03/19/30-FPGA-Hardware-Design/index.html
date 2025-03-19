@@ -1,0 +1,362 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计 | lovewhisper 念恋叶语</title><meta name="author" content="lovewhisper"><meta name="copyright" content="lovewhisper"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="由于 FPGA 兼具设计灵活以及可重构的优点，因此在电子产品设计领域得到了广泛的应用。  笔者在最近的工作中，首次接触到了 FPGA 硬件电路设计相关的工作。在这之前，用过一些开发板，也有一些基于已有硬件的软件开发工作经验。熟悉基于硬件的软件开发工作者一定非常清楚，软件的开发离不开原理图。在整个开发过程中，需要随时放一份原理图在手边，结合硬件具体开发。 很多时候，大家都认为硬件与软件应该分离，各">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计">
+<meta property="og:url" content="https://lovewhisper.github.io/2025/03/19/30-FPGA-Hardware-Design/index.html">
+<meta property="og:site_name" content="lovewhisper 念恋叶语">
+<meta property="og:description" content="由于 FPGA 兼具设计灵活以及可重构的优点，因此在电子产品设计领域得到了广泛的应用。  笔者在最近的工作中，首次接触到了 FPGA 硬件电路设计相关的工作。在这之前，用过一些开发板，也有一些基于已有硬件的软件开发工作经验。熟悉基于硬件的软件开发工作者一定非常清楚，软件的开发离不开原理图。在整个开发过程中，需要随时放一份原理图在手边，结合硬件具体开发。 很多时候，大家都认为硬件与软件应该分离，各">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lovewhisper.github.io/img/post_1.png">
+<meta property="article:published_time" content="2025-03-19T03:01:57.000Z">
+<meta property="article:modified_time" content="2025-03-19T07:38:50.748Z">
+<meta property="article:author" content="lovewhisper">
+<meta property="article:tag" content="FPGA">
+<meta property="article:tag" content="硬件设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lovewhisper.github.io/img/post_1.png"><link rel="shortcut icon" href="/img/logo.jpg"><link rel="canonical" href="https://lovewhisper.github.io/2025/03/19/30-FPGA-Hardware-Design/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = false
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-03-19 15:38:50'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/post_2.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">44</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-edit"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-sun"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fa-regular fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/post_1.png);"><nav id="nav"><span id="blog-info"><a href="/" title="lovewhisper 念恋叶语"><span class="site-name">lovewhisper 念恋叶语</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-edit"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-sun"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fa-regular fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-19T03:01:57.000Z" title="发表于 2025-03-19 11:01:57">2025-03-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-19T07:38:50.748Z" title="更新于 2025-03-19 15:38:50">2025-03-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BF%B5%E6%81%8B%E4%B8%8D%E5%BF%98/">念恋不忘</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>由于 FPGA 兼具设计灵活以及可重构的优点，因此在电子产品设计领域得到了广泛的应用。</p>
+</blockquote>
+<p>笔者在最近的工作中，首次接触到了 FPGA 硬件电路设计相关的工作。在这之前，用过一些开发板，也有一些基于已有硬件的软件开发工作经验。熟悉基于硬件的软件开发工作者一定非常清楚，软件的开发离不开原理图。在整个开发过程中，需要随时放一份原理图在手边，结合硬件具体开发。</p>
+<p>很多时候，大家都认为硬件与软件应该分离，各司其职，提高工作效率。</p>
+<p>针对此，笔者并不赞同。个人认为，硬件设计的过程中即使不会相关的软件也需要至少熟悉相关的协议。笔者曾经在某公司听一个工作经验“丰富”的老师傅指导 UART 协议，老师傅按照教科书 PPT 机械式讲解，通过听其讲解发现其甚至连协议层和应用层都无法区分开。当然，彼时为体现对其尊敬，还是选择硬着头皮听下去。后来，通过相处发现其确实非电相关专业毕业，遂能理解其中原因。不过本人对该师傅还是特别敬佩的，其懂得领域特别广。</p>
+<p>除此之外，软件开发过程中也离不开对硬件原理图的理解，如果照葫芦画瓢，可能在基础领域还能生存。在后面介绍 DDR 外围电路设计的过程中，笔者也会详细介绍软硬件协同的重要性。</p>
+<p>本文将从原理图模型的建立出发，详细阐述 FPGA 硬件电路设计的过程。</p>
+<p>同时，文章末尾会附上 Xilinx 官方所有的手册资料以及对应的内容简介，帮助开发者快速定位需要阅读的资料。</p>
+<h2 id="fpga-的选型">1 FPGA 的选型</h2>
+<p>结合项目实际需求，根据 Xilinx 官方手册 《ds180_7_Series_Overview》，选择合适的器件。</p>
+<p>从项目实际实用角度出发，器件的逻辑资源以及硬件资源最好有一定的富裕，这样针对项目中的突发情况，有更多的解决措施。同样，也需要从控制成本的角度出发，尽量选择略高于实际需求的器件。</p>
+<p>Xilinx FPGA 主要分为 S 系列、A 系列、K 系列以及 V 系列，简单理解性能由低到高。本文不涉及 ZYNQ 系列的设计，由于 ZYNQ 由 FPGA + ARM 这样的异构组合而成，硬件电路设计可能会有较大却别，笔者在写本章内容时，未详细了解，后面如果有需要会补上。</p>
+<p>用户选型的角度主要分为以下几种方法，根据外设评估需要的 IO 资源，特别是高速串行收发器 GT 资源，合理地选择 FPGA。FPGA 的 IO 资源比较丰富，IO 支持的电平接口也比较多。</p>
+<p>写到这里，需要说明一下，IO 支持的电平接口会根据电路的设计以及 IO 所处的 BANK 有所调整。</p>
+<p>所谓 BANK, 笔者个人认为就是为了 FPGA 支持各种各样电平标准专门设计的。不过笔者也搜索了下更专业的解释，如下。</p>
+<blockquote>
+<p>BANK 是指芯片内部按照功能区域划分的独立供电单元，主要用于管理不同的 I/O 标准，增强 I/O 设计的灵活性‌。</p>
+</blockquote>
+<p>FPGA 主要有三种 BANK 类型，包括 HR BANK、 HP BANK 以及 GT BANK。其中， GT BANK 是高速串行收发器的区域。</p>
+<p>在实际应用过程中，如果用户需要使用 LVDS 电平接口，HR BANK 和 HP BANK 需要电路设计时 BANK 供电电压不一样。HR BANK 支持 LVDS 该 BANK 电压需要设置未 2.5V，而 HP BANK 支持 LVDS 该 BANK 电压需要设计为 1.8V。这部分可以参考官方手册 《ug471_7Series_SelectIO》。</p>
+<p>此外，用户选型还需要考虑需要使用的逻辑资源，包括 LUT 和 BRAM 等。</p>
+<h2 id="fpga-原理图模型的建立">2 FPGA 原理图模型的建立</h2>
+<p>根据手册 《ug475_7Series_Pkg_Pinout》 第二章 《7 Series FPGAs Package Files》 定位到选型的 FPGA 点击对应封装即可跳转到对应的网站。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.xilinx.com/support/packagefiles/k7packages/xc7k325tffg900pkg.txt</span><br></pre></td></tr></table></figure>
+<p>下载该文件，并用 Excel 打开，根据 Cadence OrCAD 重新梳理文件。</p>
+<p>详见 <a target="_blank" rel="noopener" href="https://lovewhisper.top/2025/02/12/26-OrCAD-device-library/">OrCAD 绘制原理图之创建 FPGA 元件库</a>。</p>
+<h2 id="fpga-最小系统电路的设计电源电路">3 FPGA 最小系统电路的设计（电源电路）</h2>
+<p>FPGA 供电系统，主要分为内核电源 VCCINT，内部 BLock Ram 供电电源 VCCBRAM，辅助电源 VCCAUX， IO 辅助电源 VCCAUX_IO，各 BANK 供电电源 VCCO 以及高速 BANK 的供电电源 MGTAVCC 和 MGTAVTT。</p>
+<p>供电是有顺序要求的，具体如图所示，具体电压如表所示。</p>
+<img src="/2025/03/19/30-FPGA-Hardware-Design/Power.png" class="" title="电源启动时序">
+<table>
+<thead>
+<tr class="header">
+<th>Power</th>
+<th>Net</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VCCINT</td>
+<td>VCC_1V0_FPGA</td>
+<td>VCC_1V0_FPGA</td>
+</tr>
+<tr class="even">
+<td>VCCBRAM</td>
+<td>VCC_1V0_FPGA</td>
+<td>VCC_1V0_FPGA</td>
+</tr>
+<tr class="odd">
+<td>VCCAUX</td>
+<td>VCC_1V8_FPGA</td>
+<td>VCC_1V8_FPGA</td>
+</tr>
+<tr class="even">
+<td>VCCAUX_IO</td>
+<td>VCC_1V8_FPGA</td>
+<td>VCC_1V8_FPGA</td>
+</tr>
+<tr class="odd">
+<td>MGTAVCC</td>
+<td>VCC_1V0_FPGA_MGT</td>
+<td>VCC_1V0_FPGA_MGT</td>
+</tr>
+<tr class="even">
+<td>MGTVCCAUX</td>
+<td>VCC_1V8_FPGA_MGT</td>
+<td>VCC_1V8_FPGA_MGT</td>
+</tr>
+<tr class="odd">
+<td>MGTAVTT</td>
+<td>VCC_1V2_FPGA_MGT</td>
+<td>VCC_1V2_FPGA_MGT</td>
+</tr>
+<tr class="even">
+<td>BANK0</td>
+<td>VCC_BANK0</td>
+<td>VCC_2V5_FPGA</td>
+</tr>
+<tr class="odd">
+<td>BANK12</td>
+<td>VCC_BANK12</td>
+<td>VCC_3V3_FPGA</td>
+</tr>
+<tr class="even">
+<td>BANK13</td>
+<td>VCC_BANK13</td>
+<td>VCC_2V5_FPGA</td>
+</tr>
+<tr class="odd">
+<td>BANK14</td>
+<td>VCC_BANK14</td>
+<td>VCC_2V5_FPGA</td>
+</tr>
+<tr class="even">
+<td>BANK15</td>
+<td>VCC_BANK15</td>
+<td>VCC_2V5_FPGA</td>
+</tr>
+<tr class="odd">
+<td>BANK16</td>
+<td>VCC_BANK16</td>
+<td>VCC_2V5_FPGA</td>
+</tr>
+<tr class="even">
+<td>BANK17</td>
+<td>VCC_BANK17</td>
+<td>VCC_2V5_FPGA</td>
+</tr>
+<tr class="odd">
+<td>BANK18</td>
+<td>VCC_BANK18</td>
+<td>VCC_2V5_FPGA</td>
+</tr>
+<tr class="even">
+<td>BANK32</td>
+<td>VCC_BANK32</td>
+<td>VCC_1V5_FPGA</td>
+</tr>
+<tr class="odd">
+<td>BANK33</td>
+<td>VCC_BANK33</td>
+<td>VCC_1V5_FPGA</td>
+</tr>
+<tr class="even">
+<td>BANK34</td>
+<td>VCC_BANK34</td>
+<td>VCC_1V8_FPGA</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fpga-最小系统电路的设计时钟电路">4 FPGA 最小系统电路的设计（时钟电路）</h2>
+<p>一般情况下，FPGA 时钟电路可以采用晶振电路。如果用户需要后期灵活性更大，可以选用可编程的时钟芯片搭建时钟电路。</p>
+<p>需要注意的是，如果高速 BANK 挂载的外设需要时钟，高速 BANK 同样需要设计时钟电路。</p>
+<p>FPGA 每个 HR/HP BANK 上，有多对 MRCC|SRCC 引脚，这些引脚复用 IO 以及时钟引脚。同样，高速 BANK 上也有独立的参考时钟引脚。</p>
+<p>SRCC 可用于本时钟区域，MRCC 用于本时钟区域和相邻时钟区域。两者都可作用于全局时钟，需要根据用户的设计合理地选择。</p>
+<h2 id="fpga-最小系统电路地设计配置电路">5 FPGA 最小系统电路地设计（配置电路）</h2>
+<p>FPGA 的 BANK0 BANK14 上会有一些用于配置 FPGA 的引脚，主要集中在 FPGA BANK0 上。</p>
+<p>（未完待续）</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/FPGA/">FPGA</a><a class="post-meta__tags" href="/tags/%E7%A1%AC%E4%BB%B6%E8%AE%BE%E8%AE%A1/">硬件设计</a></div></div><nav class="pagination-post" id="pagination"><a class="next-post pull-full" href="/2025/03/17/29-Brevitas-Learning/" title="跟着 Brevitas 学习量化感知训练"><img class="cover" src="/img/post_1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">跟着 Brevitas 学习量化感知训练</div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a href="/2024/12/09/20-PDS/" title="紫光同创 FPGA 开发工具 PDS 入门"><img class="cover" src="/img/post_1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-09</div><div class="title">紫光同创 FPGA 开发工具 PDS 入门</div></div></a><a href="/2025/01/07/24-PDS-Debug/" title="紫光同创 FPGA 开发之 PDS 在线逻辑分析仪使用方法"><img class="cover" src="/img/post_1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-07</div><div class="title">紫光同创 FPGA 开发之 PDS 在线逻辑分析仪使用方法</div></div></a><a href="/2025/02/12/26-OrCAD-device-library/" title="OrCAD 绘制原理图之创建 FPGA 元件库"><img class="cover" src="/img/post_1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-12</div><div class="title">OrCAD 绘制原理图之创建 FPGA 元件库</div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info is-center"><div class="avatar-img"><img src="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">lovewhisper</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">44</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lovewhisper"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一起追光，即使不再是少年。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#fpga-%E7%9A%84%E9%80%89%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">1 FPGA 的选型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fpga-%E5%8E%9F%E7%90%86%E5%9B%BE%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="toc-number">2.</span> <span class="toc-text">2 FPGA 原理图模型的建立</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fpga-%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%94%B5%E6%BA%90%E7%94%B5%E8%B7%AF"><span class="toc-number">3.</span> <span class="toc-text">3 FPGA 最小系统电路的设计（电源电路）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fpga-%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%97%B6%E9%92%9F%E7%94%B5%E8%B7%AF"><span class="toc-number">4.</span> <span class="toc-text">4 FPGA 最小系统电路的设计（时钟电路）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fpga-%E6%9C%80%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%94%B5%E8%B7%AF%E5%9C%B0%E8%AE%BE%E8%AE%A1%E9%85%8D%E7%BD%AE%E7%94%B5%E8%B7%AF"><span class="toc-number">5.</span> <span class="toc-text">5 FPGA 最小系统电路地设计（配置电路）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/03/19/30-FPGA-Hardware-Design/" title="以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计"><img src="/img/post_1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计"/></a><div class="content"><a class="title" href="/2025/03/19/30-FPGA-Hardware-Design/" title="以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计">以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计</a><time datetime="2025-03-19T03:01:57.000Z" title="发表于 2025-03-19 11:01:57">2025-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/17/29-Brevitas-Learning/" title="跟着 Brevitas 学习量化感知训练"><img src="/img/post_1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="跟着 Brevitas 学习量化感知训练"/></a><div class="content"><a class="title" href="/2025/03/17/29-Brevitas-Learning/" title="跟着 Brevitas 学习量化感知训练">跟着 Brevitas 学习量化感知训练</a><time datetime="2025-03-17T07:03:32.000Z" title="发表于 2025-03-17 15:03:32">2025-03-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/02/20/28-DeepSeek-Rk3588-NPU/" title="RK3588 平台本地部署 DeepSeek-R1 大模型之 NPU 篇"><img src="/img/post_1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RK3588 平台本地部署 DeepSeek-R1 大模型之 NPU 篇"/></a><div class="content"><a class="title" href="/2025/02/20/28-DeepSeek-Rk3588-NPU/" title="RK3588 平台本地部署 DeepSeek-R1 大模型之 NPU 篇">RK3588 平台本地部署 DeepSeek-R1 大模型之 NPU 篇</a><time datetime="2025-02-20T09:21:21.000Z" title="发表于 2025-02-20 17:21:21">2025-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/02/20/27-DeepSeek-RK3588-CPU/" title="RK3588 平台本地部署 DeepSeek-R1 大模型之 CPU 篇"><img src="/img/post_1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RK3588 平台本地部署 DeepSeek-R1 大模型之 CPU 篇"/></a><div class="content"><a class="title" href="/2025/02/20/27-DeepSeek-RK3588-CPU/" title="RK3588 平台本地部署 DeepSeek-R1 大模型之 CPU 篇">RK3588 平台本地部署 DeepSeek-R1 大模型之 CPU 篇</a><time datetime="2025-02-20T03:44:19.000Z" title="发表于 2025-02-20 11:44:19">2025-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/02/12/26-OrCAD-device-library/" title="OrCAD 绘制原理图之创建 FPGA 元件库"><img src="/img/post_1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OrCAD 绘制原理图之创建 FPGA 元件库"/></a><div class="content"><a class="title" href="/2025/02/12/26-OrCAD-device-library/" title="OrCAD 绘制原理图之创建 FPGA 元件库">OrCAD 绘制原理图之创建 FPGA 元件库</a><time datetime="2025-02-12T05:47:19.000Z" title="发表于 2025-02-12 13:47:19">2025-02-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/post_2.png);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By lovewhisper</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+      
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

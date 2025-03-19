@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>以 Xilinx XC7K325T 为例详述 FPGA 硬件电路设计</title>
+      <link href="/2025/03/19/30-FPGA-Hardware-Design/"/>
+      <url>/2025/03/19/30-FPGA-Hardware-Design/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>由于 FPGA 兼具设计灵活以及可重构的优点，因此在电子产品设计领域得到了广泛的应用。</p></blockquote><p>笔者在最近的工作中，首次接触到了 FPGA 硬件电路设计相关的工作。在这之前，用过一些开发板，也有一些基于已有硬件的软件开发工作经验。熟悉基于硬件的软件开发工作者一定非常清楚，软件的开发离不开原理图。在整个开发过程中，需要随时放一份原理图在手边，结合硬件具体开发。</p><p>很多时候，大家都认为硬件与软件应该分离，各司其职，提高工作效率。</p><p>针对此，笔者并不赞同。个人认为，硬件设计的过程中即使不会相关的软件也需要至少熟悉相关的协议。笔者曾经在某公司听一个工作经验“丰富”的老师傅指导 UART 协议，老师傅按照教科书 PPT 机械式讲解，通过听其讲解发现其甚至连协议层和应用层都无法区分开。当然，彼时为体现对其尊敬，还是选择硬着头皮听下去。后来，通过相处发现其确实非电相关专业毕业，遂能理解其中原因。不过本人对该师傅还是特别敬佩的，其懂得领域特别广。</p><p>除此之外，软件开发过程中也离不开对硬件原理图的理解，如果照葫芦画瓢，可能在基础领域还能生存。在后面介绍 DDR 外围电路设计的过程中，笔者也会详细介绍软硬件协同的重要性。</p><p>本文将从原理图模型的建立出发，详细阐述 FPGA 硬件电路设计的过程。</p><p>同时，文章末尾会附上 Xilinx 官方所有的手册资料以及对应的内容简介，帮助开发者快速定位需要阅读的资料。</p><h2 id="fpga-的选型">1 FPGA 的选型</h2><p>结合项目实际需求，根据 Xilinx 官方手册 《ds180_7_Series_Overview》，选择合适的器件。</p><p>从项目实际实用角度出发，器件的逻辑资源以及硬件资源最好有一定的富裕，这样针对项目中的突发情况，有更多的解决措施。同样，也需要从控制成本的角度出发，尽量选择略高于实际需求的器件。</p><p>Xilinx FPGA 主要分为 S 系列、A 系列、K 系列以及 V 系列，简单理解性能由低到高。本文不涉及 ZYNQ 系列的设计，由于 ZYNQ 由 FPGA + ARM 这样的异构组合而成，硬件电路设计可能会有较大却别，笔者在写本章内容时，未详细了解，后面如果有需要会补上。</p><p>用户选型的角度主要分为以下几种方法，根据外设评估需要的 IO 资源，特别是高速串行收发器 GT 资源，合理地选择 FPGA。FPGA 的 IO 资源比较丰富，IO 支持的电平接口也比较多。</p><p>写到这里，需要说明一下，IO 支持的电平接口会根据电路的设计以及 IO 所处的 BANK 有所调整。</p><p>所谓 BANK, 笔者个人认为就是为了 FPGA 支持各种各样电平标准专门设计的。不过笔者也搜索了下更专业的解释，如下。</p><blockquote><p>BANK 是指芯片内部按照功能区域划分的独立供电单元，主要用于管理不同的 I/O 标准，增强 I/O 设计的灵活性‌。</p></blockquote><p>FPGA 主要有三种 BANK 类型，包括 HR BANK、 HP BANK 以及 GT BANK。其中， GT BANK 是高速串行收发器的区域。</p><p>在实际应用过程中，如果用户需要使用 LVDS 电平接口，HR BANK 和 HP BANK 需要电路设计时 BANK 供电电压不一样。HR BANK 支持 LVDS 该 BANK 电压需要设置未 2.5V，而 HP BANK 支持 LVDS 该 BANK 电压需要设计为 1.8V。这部分可以参考官方手册 《ug471_7Series_SelectIO》。</p><p>此外，用户选型还需要考虑需要使用的逻辑资源，包括 LUT 和 BRAM 等。</p><h2 id="fpga-原理图模型的建立">2 FPGA 原理图模型的建立</h2><p>根据手册 《ug475_7Series_Pkg_Pinout》 第二章 《7 Series FPGAs Package Files》 定位到选型的 FPGA 点击对应封装即可跳转到对应的网站。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.xilinx.com/support/packagefiles/k7packages/xc7k325tffg900pkg.txt</span><br></pre></td></tr></table></figure><p>下载该文件，并用 Excel 打开，根据 Cadence OrCAD 重新梳理文件。</p><p>详见 <a href="https://lovewhisper.top/2025/02/12/26-OrCAD-device-library/">OrCAD 绘制原理图之创建 FPGA 元件库</a>。</p><h2 id="fpga-最小系统电路的设计电源电路">3 FPGA 最小系统电路的设计（电源电路）</h2><p>FPGA 供电系统，主要分为内核电源 VCCINT，内部 BLock Ram 供电电源 VCCBRAM，辅助电源 VCCAUX， IO 辅助电源 VCCAUX_IO，各 BANK 供电电源 VCCO 以及高速 BANK 的供电电源 MGTAVCC 和 MGTAVTT。</p><p>供电是有顺序要求的，具体如图所示，具体电压如表所示。</p><img src="/2025/03/19/30-FPGA-Hardware-Design/Power.png" class="" title="电源启动时序"><table><thead><tr class="header"><th>Power</th><th>Net</th><th>Name</th></tr></thead><tbody><tr class="odd"><td>VCCINT</td><td>VCC_1V0_FPGA</td><td>VCC_1V0_FPGA</td></tr><tr class="even"><td>VCCBRAM</td><td>VCC_1V0_FPGA</td><td>VCC_1V0_FPGA</td></tr><tr class="odd"><td>VCCAUX</td><td>VCC_1V8_FPGA</td><td>VCC_1V8_FPGA</td></tr><tr class="even"><td>VCCAUX_IO</td><td>VCC_1V8_FPGA</td><td>VCC_1V8_FPGA</td></tr><tr class="odd"><td>MGTAVCC</td><td>VCC_1V0_FPGA_MGT</td><td>VCC_1V0_FPGA_MGT</td></tr><tr class="even"><td>MGTVCCAUX</td><td>VCC_1V8_FPGA_MGT</td><td>VCC_1V8_FPGA_MGT</td></tr><tr class="odd"><td>MGTAVTT</td><td>VCC_1V2_FPGA_MGT</td><td>VCC_1V2_FPGA_MGT</td></tr><tr class="even"><td>BANK0</td><td>VCC_BANK0</td><td>VCC_2V5_FPGA</td></tr><tr class="odd"><td>BANK12</td><td>VCC_BANK12</td><td>VCC_3V3_FPGA</td></tr><tr class="even"><td>BANK13</td><td>VCC_BANK13</td><td>VCC_2V5_FPGA</td></tr><tr class="odd"><td>BANK14</td><td>VCC_BANK14</td><td>VCC_2V5_FPGA</td></tr><tr class="even"><td>BANK15</td><td>VCC_BANK15</td><td>VCC_2V5_FPGA</td></tr><tr class="odd"><td>BANK16</td><td>VCC_BANK16</td><td>VCC_2V5_FPGA</td></tr><tr class="even"><td>BANK17</td><td>VCC_BANK17</td><td>VCC_2V5_FPGA</td></tr><tr class="odd"><td>BANK18</td><td>VCC_BANK18</td><td>VCC_2V5_FPGA</td></tr><tr class="even"><td>BANK32</td><td>VCC_BANK32</td><td>VCC_1V5_FPGA</td></tr><tr class="odd"><td>BANK33</td><td>VCC_BANK33</td><td>VCC_1V5_FPGA</td></tr><tr class="even"><td>BANK34</td><td>VCC_BANK34</td><td>VCC_1V8_FPGA</td></tr></tbody></table><h2 id="fpga-最小系统电路的设计时钟电路">4 FPGA 最小系统电路的设计（时钟电路）</h2><p>一般情况下，FPGA 时钟电路可以采用晶振电路。如果用户需要后期灵活性更大，可以选用可编程的时钟芯片搭建时钟电路。</p><p>需要注意的是，如果高速 BANK 挂载的外设需要时钟，高速 BANK 同样需要设计时钟电路。</p><p>FPGA 每个 HR/HP BANK 上，有多对 MRCC|SRCC 引脚，这些引脚复用 IO 以及时钟引脚。同样，高速 BANK 上也有独立的参考时钟引脚。</p><p>SRCC 可用于本时钟区域，MRCC 用于本时钟区域和相邻时钟区域。两者都可作用于全局时钟，需要根据用户的设计合理地选择。</p><h2 id="fpga-最小系统电路地设计配置电路">5 FPGA 最小系统电路地设计（配置电路）</h2><p>FPGA 的 BANK0 BANK14 上会有一些用于配置 FPGA 的引脚，主要集中在 FPGA BANK0 上。</p><p>（未完待续）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 念恋不忘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FPGA </tag>
+            
+            <tag> 硬件设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>跟着 Brevitas 学习量化感知训练</title>
+      <link href="/2025/03/17/29-Brevitas-Learning/"/>
+      <url>/2025/03/17/29-Brevitas-Learning/</url>
+      
+        <content type="html"><![CDATA[<p>暂未更新，稍后马上就到。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 念恋不忘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Brevitas </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>RK3588 平台本地部署 DeepSeek-R1 大模型之 NPU 篇</title>
       <link href="/2025/02/20/28-DeepSeek-Rk3588-NPU/"/>
       <url>/2025/02/20/28-DeepSeek-Rk3588-NPU/</url>
@@ -130,9 +182,9 @@
       
         <tags>
             
-            <tag> PDS </tag>
-            
             <tag> FPGA </tag>
+            
+            <tag> PDS </tag>
             
         </tags>
       
@@ -236,9 +288,9 @@
       
         <tags>
             
-            <tag> PDS </tag>
-            
             <tag> FPGA </tag>
+            
+            <tag> PDS </tag>
             
         </tags>
       
